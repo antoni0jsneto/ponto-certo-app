@@ -9,10 +9,27 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
+
+  /* variables */
+  --default-max-width: 1079px;
+  --body-background-color: #f2f4ef;
+  --header-background-color: #16c64f;
+  --card-background-color: #fefdf9;
+  --line-color: #ebebeb;
+  --red-color: #d72638;
+  --green-color: #129e3f;
+  --gray-color: #afb1ac;
+  --blue-color: #3062d4;
+  --text-black-color: #2e312d;
+  --text-gray-color: #a0a0a0;
+  --default-vertical-margin: 0.6rem;
+  --default-horizontal-margin: 0.6rem;
 }
 
 html,
 body {
   height: 100%;
-  background-color: #f1f4ed;
+  background-color: #f2f4ef;
+  overflow-x: hidden;
+  transition: all 0.2s ease-out 0s;
 }
