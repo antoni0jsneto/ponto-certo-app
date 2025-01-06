@@ -25,13 +25,17 @@
 .header-items {
   display: flex;
   align-items: center;
-  gap: 1rem;
   text-align: center;
-  justify-content: space-evenly;
+  justify-content: center;
 }
 
 .header-items:nth-child(1) {
   flex: 1;
+  gap: 4rem;
+}
+
+.header-items:nth-child(2) {
+  gap: 7px;
 }
 
 .header-item {
