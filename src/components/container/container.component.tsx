@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 
 // Style
-import './container.styles.css';
+import { ContainerContent, ContainerMaster } from './container.styles';
 
 interface ContainerProps {
   children: React.ReactNode;
@@ -9,9 +9,9 @@ interface ContainerProps {
 
 const Container: FunctionComponent<ContainerProps> = ({ children }) => {
   return (
-    <div className="container">
-      <div className="container-content">{children}</div>
-    </div>
+    <ContainerMaster>
+      <ContainerContent>{children}</ContainerContent>
+    </ContainerMaster>
   );
 };
 

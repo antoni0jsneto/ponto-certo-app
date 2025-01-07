@@ -1,61 +1,63 @@
-.header-container {
+import styled from 'styled-components';
+
+export const HeaderContainer = styled.div`
   width: 100%;
   display: flex;
   padding: 20px;
   color: #fffdf9;
   gap: 4rem;
   max-width: var(--default-max-width);
-}
+`;
 
-.header-title {
+export const HeaderTitle = styled.h2`
   font-weight: bold;
   font-size: 1.5rem;
   display: flex;
   align-items: center;
   gap: 5px;
   cursor: pointer;
-}
+`;
 
-.header-items-container {
+export const HeaderItemsContainer = styled.div`
   display: flex;
   justify-content: space-between;
   flex: 1;
   gap: 2rem;
-}
+`;
 
-.header-items {
+export const HeaderItems = styled.div`
   display: flex;
   align-items: center;
   text-align: center;
   justify-content: center;
-}
 
-.header-items:nth-child(1) {
-  flex: 1;
-  gap: 4rem;
-  color: #d3f4dc;
-}
+  &:nth-child(1) {
+    flex: 1;
+    gap: 4rem;
+    color: #d3f4dc;
+  }
 
-.header-items:nth-child(1) :hover,
-.header-items:nth-child(1) :active {
-  color: #fff;
-  border-bottom: 2px solid #fff;
-}
+  &:nth-child(1):hover,
+  &:nth-child(1):active {
+    color: #fff;
+    border-bottom: 2px solid #fff;
+  }
 
-.header-items:nth-child(2) {
-  gap: 7px;
-}
+  &:nth-child(2) {
+    gap: 7px;
+  }
+`;
 
-.header-item {
+export const HeaderItem = styled.div`
   font-weight: 600;
   font-size: 1rem;
   display: flex;
   gap: 2px;
   position: relative;
   cursor: pointer;
-}
+`;
 
-.notification-icon {
+export const NotificationIcon = styled.p`
   font-size: 0.6rem;
   background-color: #d82637;
   color: #fff;
@@ -70,4 +72,4 @@
   position: absolute;
   top: 9px;
   left: 13px;
-}
+`;

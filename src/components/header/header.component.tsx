@@ -1,7 +1,16 @@
-import './header.styles.css';
 import { IoMdNotifications } from 'react-icons/io';
 import { FaGear } from 'react-icons/fa6';
 import { CgSpinnerTwo } from 'react-icons/cg';
+
+// Styles
+import {
+  HeaderContainer,
+  HeaderItem,
+  HeaderItems,
+  HeaderItemsContainer,
+  HeaderTitle,
+  NotificationIcon,
+} from './header.styles';
 
 const Header = () => {
   return (
@@ -13,31 +22,31 @@ const Header = () => {
         marginBottom: '2rem',
       }}
     >
-      <div className="header-container">
-        <h2 className="header-title">
+      <HeaderContainer>
+        <HeaderTitle>
           <CgSpinnerTwo size={30} />
           PONTO CERTO APP
-        </h2>
-        <div className="header-items-container">
-          <div className="header-items">
-            <div className="header-item">visão geral</div>
-            <div className="header-item">lançamentos</div>
-            <div className="header-item">relatórios</div>
-            <div className="header-item">metas</div>
-          </div>
-          <div className="header-items">
-            <div className="header-item">
+        </HeaderTitle>
+        <HeaderItemsContainer>
+          <HeaderItems>
+            <HeaderItem>visão geral</HeaderItem>
+            <HeaderItem>lançamentos</HeaderItem>
+            <HeaderItem>relatórios</HeaderItem>
+            <HeaderItem>metas</HeaderItem>
+          </HeaderItems>
+          <HeaderItems>
+            <HeaderItem>
               <FaGear size={20} />
-            </div>
-            <div className="header-item">
+            </HeaderItem>
+            <HeaderItem>
               <IoMdNotifications size={22} />
-              <p className="notification-icon">5</p>
-            </div>
+              <NotificationIcon>5</NotificationIcon>
+            </HeaderItem>
 
             {/* Perfil aqui */}
-          </div>
-        </div>
-      </div>
+          </HeaderItems>
+        </HeaderItemsContainer>
+      </HeaderContainer>
     </div>
   );
 };

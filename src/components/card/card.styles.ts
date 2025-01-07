@@ -1,4 +1,12 @@
-.card-container {
+import styled from 'styled-components';
+
+interface CardProps {
+  width: string;
+}
+
+export const CardContainer = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== 'width',
+})<CardProps>`
   display: flex;
   background-color: var(--card-background-color);
   padding: 30px;
@@ -8,4 +16,5 @@
   min-height: 180px;
   min-width: 150px;
   box-sizing: border-box;
-}
+  flex: 1 1 calc(${(props) => props.width} - 1rem);
+`;

@@ -1,7 +1,7 @@
 import { FunctionComponent, ReactNode } from 'react';
 
 // Style
-import './card.styles.css';
+import { CardContainer } from './card.styles';
 
 interface CardProps {
   width: string;
@@ -9,14 +9,7 @@ interface CardProps {
 }
 
 const Card: FunctionComponent<CardProps> = ({ width, children }) => {
-  return (
-    <div
-      style={{ flex: `1 1 calc(${width} - 1rem)` }}
-      className="card-container"
-    >
-      {children}
-    </div>
-  );
+  return <CardContainer width={width}>{children}</CardContainer>;
 };
 
 export default Card;
