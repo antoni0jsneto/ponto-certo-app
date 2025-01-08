@@ -5,7 +5,7 @@ import './quick-access.styles.css';
 import { FiMinusCircle } from 'react-icons/fi';
 import { LuCirclePlus } from 'react-icons/lu';
 import { BiTransfer } from 'react-icons/bi';
-import { TfiBarChart } from 'react-icons/tfi';
+import { BsBarChart } from 'react-icons/bs';
 
 // Component
 import QuickCustomButton from '../quick-custom-button/quick-custom-button.component';
@@ -48,7 +48,7 @@ const QuickAccess = () => {
             Transf.
           </QuickCustomButton>
           <QuickCustomButton
-            startIcon={<TfiBarChart />}
+            startIcon={<BsBarChart />}
             iconColor="var(--blue-color)"
           >
             Relat.
