@@ -6,6 +6,13 @@ const ButtonThemes = {
     hoverBackground: '#A0A0A0',
     hoverTextColor: '#000000',
   },
+  primary: {
+    borderColor: '#007bff',
+    textColor: '#007bff',
+    background: 'transparent',
+    hoverBackground: '#007bff',
+    hoverTextColor: '#ffffff',
+  },
   success: {
     borderColor: '#28a745',
     textColor: '#28a745',
@@ -26,6 +33,20 @@ const ButtonThemes = {
     background: 'transparent',
     hoverBackground: '#ffc107',
     hoverTextColor: '#000000',
+  },
+  info: {
+    borderColor: '#17a2b8',
+    textColor: '#17a2b8',
+    background: 'transparent',
+    hoverBackground: '#17a2b8',
+    hoverTextColor: '#ffffff',
+  },
+  dark: {
+    borderColor: '#343a40',
+    textColor: '#343a40',
+    background: 'transparent',
+    hoverBackground: '#343a40',
+    hoverTextColor: '#ffffff',
   },
 };
 

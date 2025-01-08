@@ -7,7 +7,14 @@ import ButtonThemes from '../../theme/button.themes';
 interface CustomButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   startIcon?: ReactNode;
-  variant?: 'default' | 'success' | 'danger' | 'warning';
+  variant?:
+    | 'default'
+    | 'primary'
+    | 'success'
+    | 'danger'
+    | 'warning'
+    | 'info'
+    | 'dark';
 }
 
 const CustomButton: FunctionComponent<CustomButtonProps> = ({
