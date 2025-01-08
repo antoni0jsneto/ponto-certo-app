@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const HeaderContainer = styled.div`
   width: 100%;
   display: flex;
-  padding: 20px;
+  padding: 6px;
   color: #fffdf9;
   gap: 4rem;
   max-width: var(--default-max-width);
@@ -16,6 +16,10 @@ export const HeaderTitle = styled.h2`
   align-items: center;
   gap: 5px;
   cursor: pointer;
+
+  &:hover {
+    color: #d3f4dc;
+  }
 `;
 
 export const HeaderItemsContainer = styled.div`
@@ -37,12 +41,6 @@ export const HeaderItems = styled.div`
     color: #d3f4dc;
   }
 
-  &:nth-child(1):hover,
-  &:nth-child(1):active {
-    color: #fff;
-    border-bottom: 2px solid #fff;
-  }
-
   &:nth-child(2) {
     gap: 7px;
   }
@@ -53,14 +51,32 @@ export const HeaderItem = styled.div`
   font-size: 1rem;
   display: flex;
   gap: 2px;
+  cursor: pointer;
+
+  &:hover,
+  &:active {
+    color: #fff;
+    border-bottom: 2px solid #fff;
+  }
+`;
+
+export const HeaderIcon = styled.div`
+  font-weight: 600;
+  font-size: 1rem;
+  display: flex;
+  gap: 2px;
   position: relative;
   cursor: pointer;
+  color: #fff;
+
+  &:hover {
+    color: #d3f4dc;
+  }
 `;
 
 export const NotificationIcon = styled.p`
   font-size: 0.6rem;
   background-color: #d82637;
-  color: #fff;
   padding: 5px;
   width: 16px;
   height: 16px;

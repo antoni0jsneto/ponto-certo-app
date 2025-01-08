@@ -5,6 +5,7 @@ import { CgSpinnerTwo } from 'react-icons/cg';
 // Styles
 import {
   HeaderContainer,
+  HeaderIcon,
   HeaderItem,
   HeaderItems,
   HeaderItemsContainer,
@@ -35,13 +36,13 @@ const Header = () => {
             <HeaderItem>metas</HeaderItem>
           </HeaderItems>
           <HeaderItems>
-            <HeaderItem>
+            <HeaderIcon>
               <FaGear size={20} />
-            </HeaderItem>
-            <HeaderItem>
+            </HeaderIcon>
+            <HeaderIcon>
               <IoMdNotifications size={22} />
               <NotificationIcon>5</NotificationIcon>
-            </HeaderItem>
+            </HeaderIcon>
 
             {/* Perfil aqui */}
           </HeaderItems>
