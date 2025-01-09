@@ -6,6 +6,7 @@ import QuickAccess from '../../components/home/quick-access.component';
 import MyAccounts from '../../components/my-accounts/my-accounts.component';
 import MyCreditCards from '../../components/my-credit-cards/my-credit-cards.component';
 import NextAccounts from '../../components/next-accounts/next-accounts.component';
+import MonthlySpendingLimit from '../../components/monthly-spending-limit/monthly-spending-limit.component';
 
 // Utilities
 import NextAccount from '../../types/next-account.types';
@@ -16,6 +17,7 @@ import { FaLaptopCode } from 'react-icons/fa6';
 import { BiSolidDrink } from 'react-icons/bi';
 import { GoStarFill } from 'react-icons/go';
 import { AiFillHome } from 'react-icons/ai';
+import { IoSchool } from 'react-icons/io5';
 
 const HomePage = () => {
   const categories: Category[] = [
@@ -120,6 +122,30 @@ const HomePage = () => {
         type: 'expense',
       },
     },
+    {
+      title: 'escola',
+      date: '10/01/2025',
+      value: 1500,
+      category: {
+        color: '#ffffff',
+        background: '#6470ba',
+        icon: <IoSchool />,
+        title: 'Educação',
+        type: 'expense',
+      },
+    },
+    {
+      title: 'luz',
+      date: '10/01/2025',
+      value: 250,
+      category: {
+        color: '#ffffff',
+        background: '#8193ff',
+        icon: <AiFillHome />,
+        title: 'Casa',
+        type: 'expense',
+      },
+    },
   ];
 
   return (
@@ -142,6 +168,12 @@ const HomePage = () => {
           </Card>
           <Card width="100%">
             <NextAccounts title="Contas a receber" itens={nextAccounts} />
+          </Card>
+          <Card width="100%">
+            <MonthlySpendingLimit
+              title="Maiores gastos do mês atual"
+              expenses={expenses}
+            />
           </Card>
         </div>
 
