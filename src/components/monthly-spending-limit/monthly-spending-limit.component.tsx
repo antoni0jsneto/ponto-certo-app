@@ -67,8 +67,8 @@ const MonthlySpendingLimit: FunctionComponent<MonthlySpendingLimitProps> = ({
       <MonthlySpendingLimitTitle>{title}</MonthlySpendingLimitTitle>
       <MonthlySpendingLimitItems>
         {percentages.map((item, index) => (
-          <div>
-            <MonthlySpendingLimitItem key={index}>
+          <div key={index}>
+            <MonthlySpendingLimitItem>
               <MonthlySpendingLimitItemsChart>
                 <PieChart width={50} height={50}>
                   <Pie
