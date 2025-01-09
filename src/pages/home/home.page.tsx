@@ -14,12 +14,26 @@ const HomePage = () => {
         <Card width="100%">
           <QuickAccess />
         </Card>
-        <Card width="50%">
-          <MyAccounts />
-        </Card>
-        <Card width="50%">
-          <MyCreditCards />
-        </Card>
+      </Container>
+      <Container>
+        <div
+          style={{
+            width: 'calc(50% - 1rem)',
+          }}
+        >
+          <Card width="100%">
+            <MyAccounts />
+          </Card>
+        </div>
+        <div
+          style={{
+            width: '50%',
+          }}
+        >
+          <Card width="100%">
+            <MyCreditCards />
+          </Card>
+        </div>
       </Container>
     </div>
   );
