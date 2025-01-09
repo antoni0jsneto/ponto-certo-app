@@ -2,6 +2,8 @@ import { FunctionComponent, ReactNode, ButtonHTMLAttributes } from 'react';
 
 // Styles
 import { CustomButtonContainer, IconContainer } from './custom-button.styles';
+
+// Utilities
 import ButtonThemes from '../../theme/button.themes';
 
 interface CustomButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -23,14 +25,15 @@ const CustomButton: FunctionComponent<CustomButtonProps> = ({
   startIcon,
   ...rest
 }) => {
-  const theme = ButtonThemes[variant] || ButtonThemes.default;
+  const { borderColor, background, hoverBackground, hoverTextColor } =
+    ButtonThemes[variant];
 
   return (
     <CustomButtonContainer
-      borderColor={theme.borderColor}
-      background={theme.background}
-      hoverBackground={theme.hoverBackground}
-      hoverTextColor={theme.hoverTextColor}
+      borderColor={borderColor}
+      background={background}
+      hoverBackground={hoverBackground}
+      hoverTextColor={hoverTextColor}
       {...rest}
     >
       {startIcon && <IconContainer>{startIcon}</IconContainer>}

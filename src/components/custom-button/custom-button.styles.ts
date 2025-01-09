@@ -8,7 +8,13 @@ interface CustomButtonProps {
 }
 
 export const CustomButtonContainer = styled.button.withConfig({
-  shouldForwardProp: (prop) => prop !== 'iconColor',
+  shouldForwardProp: (prop) =>
+    ![
+      'borderColor',
+      'background',
+      'hoverBackground',
+      'hoverTextColor',
+    ].includes(prop),
 })<CustomButtonProps>`
   width: 100%;
   padding: 10px 20px;
