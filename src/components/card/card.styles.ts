@@ -17,4 +17,5 @@ export const CardContainer = styled.div.withConfig({
   min-width: 150px;
   box-sizing: border-box;
   flex: 1 1 calc(${(props) => props.width} - 1rem);
+  margin-bottom: 1rem;
 `;
