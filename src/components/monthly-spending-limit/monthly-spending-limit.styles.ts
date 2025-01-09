@@ -24,8 +24,9 @@ export const MonthlySpendingLimitItemsContainer = styled.div``;
 
 export const MonthlySpendingLimitItems = styled.div`
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   gap: 10px;
+  margin-bottom: 30px;
 `;
 
 export const MonthlySpendingLimitItemsChart = styled.div`
@@ -35,21 +36,10 @@ export const MonthlySpendingLimitItemsChart = styled.div`
   cursor: pointer;
 `;
 
-export const MonthlySpendingLimitItemContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: start;
-  gap: 10px;
-  flex: 1;
-`;
-
 export const MonthlySpendingLimitItem = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  gap: 10px;
   flex: 1;
-  margin-bottom: 10px;
 `;
 
 export const MonthlySpendingLimitItemIcon = styled.div.withConfig({
@@ -64,18 +54,36 @@ export const MonthlySpendingLimitItemIcon = styled.div.withConfig({
   justify-content: center;
 `;
 
+export const MonthlySpendingLimitItemContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: start;
+`;
+
+export const MonthlySpendingLimitItemContent2 = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+`;
+
 export const MonthlySpendingLimitItemTitle = styled.p`
   color: #2e312d;
   font-size: 16px;
-  font-weight: 500;
-  line-height: 20px;
+  line-height: 19px;
   text-align: start;
   flex: 1;
+  margin-bottom: 3px;
 `;
 
 export const MonthlySpendingLimitItemSubtitle = styled.p`
-  color: inherit;
-  font-weight: 600;
-  font-size: 15px;
-  line-height: 20px;
+  color: #a0a0a0;
+  font-size: 14px;
+  text-align: start;
+`;
+
+export const MonthlySpendingLimitDivisory = styled.div`
+  border-bottom: 1px solid var(--line-color);
+  width: 100%;
+  margin: 20px 0;
 `;

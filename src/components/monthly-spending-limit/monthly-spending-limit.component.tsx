@@ -1,8 +1,10 @@
 import { FunctionComponent } from 'react';
 import {
   MonthlySpendingLimitContainer,
+  MonthlySpendingLimitDivisory,
   MonthlySpendingLimitItem,
-  MonthlySpendingLimitItemContainer,
+  MonthlySpendingLimitItemContent,
+  MonthlySpendingLimitItemContent2,
   MonthlySpendingLimitItemIcon,
   MonthlySpendingLimitItems,
   MonthlySpendingLimitItemsChart,
@@ -64,63 +66,67 @@ const MonthlySpendingLimit: FunctionComponent<MonthlySpendingLimitProps> = ({
     <MonthlySpendingLimitContainer>
       <MonthlySpendingLimitTitle>{title}</MonthlySpendingLimitTitle>
       <MonthlySpendingLimitItems>
-        <MonthlySpendingLimitItemsContainer>
-          {percentages.map((item, index) => (
-            <MonthlySpendingLimitItemContainer key={index}>
-              <MonthlySpendingLimitItem>
-                <MonthlySpendingLimitItemIcon backgroundIcon={item.background}>
-                  {item.icon}
-                </MonthlySpendingLimitItemIcon>
+        {percentages.map((item, index) => (
+          <div>
+            <MonthlySpendingLimitItem key={index}>
+              <MonthlySpendingLimitItemsChart>
+                <PieChart width={50} height={50}>
+                  <Pie
+                    data={percentages}
+                    dataKey="value"
+                    nameKey="category"
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={10}
+                    outerRadius={20}
+                    fill="#8884d8"
+                    style={{ cursor: 'pointer' }}
+                  >
+                    {percentages.map((item, index) => (
+                      <Cell
+                        key={`cell-${index}`}
+                        fill={item.background}
+                        stroke="none"
+                      />
+                    ))}
+                  </Pie>
+                  <Tooltip
+                    formatter={(value: number, name: string) => [
+                      new Intl.NumberFormat('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL',
+                      }).format(value),
+                      `${name}`,
+                    ]}
+                    contentStyle={{
+                      backgroundColor: '#fff',
+                      borderRadius: '8px',
+                      padding: '8px',
+                    }}
+                    itemStyle={{ color: '#333' }}
+                  />
+                </PieChart>
+              </MonthlySpendingLimitItemsChart>
+              <MonthlySpendingLimitItemContent>
                 <MonthlySpendingLimitItemTitle>
                   {item.category}
                 </MonthlySpendingLimitItemTitle>
                 <MonthlySpendingLimitItemSubtitle>
-                  {item.percentage}%
+                  Meta: R$ {item.value}
                 </MonthlySpendingLimitItemSubtitle>
-              </MonthlySpendingLimitItem>
-            </MonthlySpendingLimitItemContainer>
-          ))}
-        </MonthlySpendingLimitItemsContainer>
-        <MonthlySpendingLimitItemsChart>
-          <PieChart width={140} height={140}>
-            <Pie
-              data={percentages}
-              dataKey="value"
-              nameKey="category"
-              cx="50%"
-              cy="50%"
-              innerRadius={40}
-              outerRadius={60}
-              fill="#8884d8"
-              style={{ cursor: 'pointer' }}
-            >
-              {percentages.map((item, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={item.background}
-                  stroke="none"
-                />
-              ))}
-            </Pie>
-            <Tooltip
-              formatter={(value: number, name: string) => [
-                new Intl.NumberFormat('pt-BR', {
-                  style: 'currency',
-                  currency: 'BRL',
-                }).format(value),
-                `${name}`,
-              ]}
-              contentStyle={{
-                backgroundColor: '#fff',
-                borderRadius: '8px',
-                padding: '8px',
-              }}
-              itemStyle={{ color: '#333' }}
-            />
-          </PieChart>
-          <CustomButton>Ver relatório</CustomButton>
-        </MonthlySpendingLimitItemsChart>
+                <MonthlySpendingLimitItemSubtitle>
+                  Gasto: R$ {item.value}
+                </MonthlySpendingLimitItemSubtitle>
+              </MonthlySpendingLimitItemContent>
+              <MonthlySpendingLimitItemContent2>
+                {item.percentage}%
+              </MonthlySpendingLimitItemContent2>
+            </MonthlySpendingLimitItem>
+            {index < percentages.length - 1 && <MonthlySpendingLimitDivisory />}
+          </div>
+        ))}
       </MonthlySpendingLimitItems>
+      <CustomButton>Análise completa</CustomButton>
     </MonthlySpendingLimitContainer>
   );
 };
