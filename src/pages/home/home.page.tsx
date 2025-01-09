@@ -18,6 +18,7 @@ import { BiSolidDrink } from 'react-icons/bi';
 import { GoStarFill } from 'react-icons/go';
 import { AiFillHome } from 'react-icons/ai';
 import { IoSchool } from 'react-icons/io5';
+import HigherExpenses from '../../components/higher-expenses/higher-expenses.component';
 
 const HomePage = () => {
   const categories: Category[] = [
@@ -171,7 +172,7 @@ const HomePage = () => {
           </Card>
           <Card width="100%">
             <MonthlySpendingLimit
-              title="Maiores gastos do mês atual"
+              title="Limite de gastos de Janeiro"
               expenses={expenses}
             />
           </Card>
@@ -188,6 +189,12 @@ const HomePage = () => {
           </Card>
           <Card width="100%">
             <NextAccounts title="Contas a pagar" itens={expenses} />
+          </Card>
+          <Card width="100%">
+            <HigherExpenses
+              title="Maiores gastos do mês atual"
+              expenses={expenses}
+            />
           </Card>
         </div>
       </Container>
