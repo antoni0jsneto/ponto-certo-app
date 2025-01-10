@@ -8,7 +8,7 @@ export const CustomButtonContainer = styled.button`
   width: 82px;
   height: 90px;
   background-color: transparent;
-  color: #a0a0a0;
+  color: var(--text-gray-color);
   text-transform: uppercase;
   display: flex;
   flex-direction: column;
@@ -16,7 +16,7 @@ export const CustomButtonContainer = styled.button`
   align-items: center;
   justify-content: center;
   border-radius: 10px;
-  border: 1px solid #f2f4ef;
+  border: 1px solid var(--body-background-color);
   padding-top: 10px;
   padding-bottom: 10px;
   padding-right: 15px;
@@ -40,5 +40,5 @@ export const IconContainer = styled.div.withConfig({
   height: 100%;
   display: flex;
   align-items: center;
-  color: ${(props) => props.iconColor || '#a0a0a0'};
+  color: ${(props) => props.iconColor || 'var(--text-gray-color)'};
 `;

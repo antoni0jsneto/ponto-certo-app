@@ -23,9 +23,9 @@ export const CustomButtonContainer = styled.button.withConfig({
   font-weight: 500;
   line-height: 38px;
   border-radius: 6px;
-  border: 1px solid ${(props) => props.borderColor || '#ebebeb'};
+  border: 1px solid ${(props) => props.borderColor || 'var(--line-color)'};
   background: ${(props) => props.background || 'transparent'};
-  color: ${(props) => props.textColor || '#a0a0a0'};
+  color: ${(props) => props.textColor || 'var(--text-gray-color)'};
   display: flex;
   align-items: center;
   justify-content: center;

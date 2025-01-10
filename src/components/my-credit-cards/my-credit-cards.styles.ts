@@ -33,7 +33,7 @@ export const GeneralBalanceSubtitle = styled.p`
 `;
 
 export const GeneralBalance = styled.span`
-  color: #2e312d;
+  color: var(--text-black-color);
   font-size: 20px;
   line-height: 20px;
   font-weight: 600;
@@ -52,7 +52,7 @@ export const MyCreditCardsContent = styled.div`
 `;
 
 export const MyCreditCardsContentTitle = styled.h2`
-  color: #2e312d;
+  color: var(--text-black-color);
   font-size: 17px;
   font-weight: 600;
   line-height: 17px;
@@ -114,7 +114,7 @@ export const MyCreditCardsItemBalanceContainer = styled.div`
 `;
 
 export const MyCreditCardsItemBalance = styled.p`
-  color: #3062d4;
+  color: var(--blue-color);
   font-size: 18px;
   font-weight: 600;
 `;
@@ -123,7 +123,7 @@ export const MyCreditCardsItemSeeInvoice = styled.button`
   display: flex;
   flex-shrink: 0;
   background-color: #dffce9;
-  color: #129e3f;
+  color: var(--green-color);
   height: 34px;
   align-items: center;
   justify-content: center;
@@ -146,7 +146,7 @@ export const MyCreditCardsItemSeeBalanceContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   margin: 15px 0 40px 0;
-  background-color: #f2f4ef;
+  background-color: var(--body-background-color);
   border-radius: 24px;
   height: 72px;
   padding: 0 40px 0 75px;
@@ -174,7 +174,7 @@ export const MyCreditCardsItemAvaliableLimitTitle2 = styled.p`
 export const MyCreditCardsItemAvaliableLimitSubtitle = styled.span`
   font-size: inherit;
   font-weight: 700;
-  color: #2e312d;
+  color: var(--text-black-color);
   margin-left: 6px;
   font-size: 16px;
 `;

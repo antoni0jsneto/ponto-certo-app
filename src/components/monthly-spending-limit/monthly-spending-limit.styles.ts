@@ -13,7 +13,7 @@ export const MonthlySpendingLimitContainer = styled.div`
 
 export const MonthlySpendingLimitTitle = styled.h2`
   text-align: start;
-  color: #2e312d;
+  color: var(--text-black-color);
   font-size: 17px;
   font-weight: 600;
   line-height: 17px;
@@ -68,7 +68,7 @@ export const MonthlySpendingLimitItemContent2 = styled.div`
 `;
 
 export const MonthlySpendingLimitItemTitle = styled.p`
-  color: #2e312d;
+  color: var(--text-black-color);
   font-size: 16px;
   line-height: 19px;
   text-align: start;
@@ -77,7 +77,7 @@ export const MonthlySpendingLimitItemTitle = styled.p`
 `;
 
 export const MonthlySpendingLimitItemSubtitle = styled.p`
-  color: #a0a0a0;
+  color: var(--text-gray-color);
   font-size: 14px;
   text-align: start;
 `;

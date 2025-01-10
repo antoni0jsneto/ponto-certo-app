@@ -13,7 +13,7 @@ export const HigherExpensesContainer = styled.div`
 
 export const HigherExpensesTitle = styled.h2`
   text-align: start;
-  color: #2e312d;
+  color: var(--text-black-color);
   font-size: 17px;
   font-weight: 600;
   line-height: 17px;
@@ -41,6 +41,11 @@ export const HigherExpensesItemContainer = styled.div`
   align-items: start;
   gap: 10px;
   flex: 1;
+
+  &:not(&:last-child) {
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--line-color);
+  }
 `;
 
 export const HigherExpensesItem = styled.div`
@@ -65,7 +70,7 @@ export const HigherExpensesItemIcon = styled.div.withConfig({
 `;
 
 export const HigherExpensesItemTitle = styled.p`
-  color: #2e312d;
+  color: var(--text-black-color);
   font-size: 16px;
   font-weight: 500;
   line-height: 20px;

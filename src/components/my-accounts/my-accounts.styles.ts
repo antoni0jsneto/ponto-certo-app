@@ -33,7 +33,7 @@ export const GeneralBalanceSubtitle = styled.p`
 `;
 
 export const GeneralBalance = styled.span`
-  color: #2e312d;
+  color: var(--text-black-color);
   font-size: 20px;
   line-height: 20px;
   font-weight: 600;
@@ -52,7 +52,7 @@ export const MyAccountsContent = styled.div`
 `;
 
 export const MyAccountsContentTitle = styled.h2`
-  color: #2e312d;
+  color: var(--text-black-color);
   font-size: 17px;
   font-weight: 600;
   line-height: 17px;
@@ -115,7 +115,7 @@ export const MyAccountsItemBalanceContainer = styled.div`
 `;
 
 export const MyAccountsItemBalance = styled.p`
-  color: #3062d4;
+  color: var(--blue-color);
   font-size: 18px;
   font-weight: 600;
 `;

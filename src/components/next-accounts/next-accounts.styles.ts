@@ -17,7 +17,7 @@ export const NextAccountsHeader = styled.div`
 
 export const NextAccountstTitle = styled.h2`
   text-align: start;
-  color: #2e312d;
+  color: var(--text-black-color);
   font-size: 17px;
   font-weight: 600;
   line-height: 17px;
@@ -81,7 +81,7 @@ export const NextAccountsItemContentTitle = styled.p`
 `;
 
 export const NextAccountsItemContentSubtitle = styled.p`
-  color: #a0a0a0;
+  color: var(--text-gray-color);
   font-size: 14px;
   text-align: start;
 `;
