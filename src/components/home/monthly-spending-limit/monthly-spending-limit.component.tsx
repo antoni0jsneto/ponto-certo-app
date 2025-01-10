@@ -15,7 +15,7 @@ import {
 
 // Utilities
 import NextAccount from '../../../types/next-account.types';
-import { Cell, Pie, PieChart, Tooltip } from 'recharts';
+import { PieChart, Pie, Cell } from 'recharts';
 
 // Components
 import CustomButton from '../../custom-button/custom-button.component';
@@ -37,6 +37,7 @@ const MonthlySpendingLimit: FunctionComponent<MonthlySpendingLimitProps> = ({
       if (!acc[categoryTitle]) {
         acc[categoryTitle] = {
           value: 0,
+          goal: expense.category.goal || 0,
           icon: expense.category.icon,
           background: expense.category.background,
         };
@@ -47,22 +48,19 @@ const MonthlySpendingLimit: FunctionComponent<MonthlySpendingLimitProps> = ({
     },
     {} as Record<
       string,
-      { value: number; icon: React.ReactNode; background: string }
+      { value: number; goal: number; icon: React.ReactNode; background: string }
     >
   );
 
-  const totalExpenses = Object.values(groupedByCategory).reduce(
-    (acc, category) => acc + category.value,
-    0
-  );
-
   const percentages = Object.entries(groupedByCategory).map(
-    ([category, { value, icon, background }]) => ({
+    ([category, { value, goal, icon, background }]) => ({
       category,
       value,
+      goal,
       icon,
       background,
-      percentage: ((value / totalExpenses) * 100).toFixed(2),
+      percentage: ((value / goal) * 100).toFixed(2),
+      color: value > goal ? '#d72638' : '#61CF98',
     })
   );
 
@@ -74,41 +72,30 @@ const MonthlySpendingLimit: FunctionComponent<MonthlySpendingLimitProps> = ({
           <div key={index}>
             <MonthlySpendingLimitItem>
               <MonthlySpendingLimitItemsChart>
-                <PieChart width={50} height={50}>
+                <PieChart width={80} height={80}>
                   <Pie
-                    data={percentages}
+                    data={[
+                      { name: 'Progresso', value: item.value },
+                      {
+                        name: 'Restante',
+                        value:
+                          item.goal - item.value > 0
+                            ? item.goal - item.value
+                            : 0,
+                      },
+                    ]}
                     dataKey="value"
-                    nameKey="category"
                     cx="50%"
                     cy="50%"
-                    innerRadius={10}
-                    outerRadius={20}
-                    fill="#8884d8"
-                    style={{ cursor: 'pointer' }}
+                    innerRadius={20}
+                    outerRadius={30}
+                    startAngle={80}
+                    endAngle={440}
+                    paddingAngle={0}
                   >
-                    {percentages.map((item, index) => (
-                      <Cell
-                        key={`cell-${index}`}
-                        fill={item.background}
-                        stroke="none"
-                      />
-                    ))}
+                    <Cell key="progress" fill={item.color} />
+                    <Cell key="background" fill="#eaeaea" />
                   </Pie>
-                  <Tooltip
-                    formatter={(value: number, name: string) => [
-                      new Intl.NumberFormat('pt-BR', {
-                        style: 'currency',
-                        currency: 'BRL',
-                      }).format(value),
-                      `${name}`,
-                    ]}
-                    contentStyle={{
-                      backgroundColor: '#fff',
-                      borderRadius: '8px',
-                      padding: '8px',
-                    }}
-                    itemStyle={{ color: '#333' }}
-                  />
                 </PieChart>
               </MonthlySpendingLimitItemsChart>
               <MonthlySpendingLimitItemContent>
@@ -116,10 +103,10 @@ const MonthlySpendingLimit: FunctionComponent<MonthlySpendingLimitProps> = ({
                   {item.category}
                 </MonthlySpendingLimitItemTitle>
                 <MonthlySpendingLimitItemSubtitle>
-                  Meta: R$ {item.value}
+                  Meta: R$ {item.goal.toLocaleString('pt-BR')}
                 </MonthlySpendingLimitItemSubtitle>
                 <MonthlySpendingLimitItemSubtitle>
-                  Gasto: R$ {item.value}
+                  Gasto: R$ {item.value.toLocaleString('pt-BR')}
                 </MonthlySpendingLimitItemSubtitle>
               </MonthlySpendingLimitItemContent>
               <MonthlySpendingLimitItemContent2>

@@ -28,6 +28,7 @@ const HomePage = () => {
       icon: <PiForkKnifeFill />,
       title: 'Alimentação',
       type: 'expense',
+      goal: 1000,
     },
     {
       color: '#ffffff',
@@ -35,6 +36,7 @@ const HomePage = () => {
       icon: <FaLaptopCode />,
       title: 'Assinaturas e serviços',
       type: 'expense',
+      goal: 1000,
     },
     {
       color: '#ffffff',
@@ -42,6 +44,7 @@ const HomePage = () => {
       icon: <BiSolidDrink />,
       title: 'Bares e restaurantes',
       type: 'expense',
+      goal: 1000,
     },
     {
       color: '#ffffff',
@@ -49,6 +52,7 @@ const HomePage = () => {
       icon: <AiFillHome />,
       title: 'Casa',
       type: 'expense',
+      goal: 1000,
     },
     {
       color: '#ffffff',
@@ -56,6 +60,7 @@ const HomePage = () => {
       icon: <GoStarFill />,
       title: 'Salário',
       type: 'income',
+      goal: 1000,
     },
   ];
 
@@ -70,6 +75,7 @@ const HomePage = () => {
         icon: <GoStarFill />,
         title: 'Salário',
         type: 'income',
+        goal: 1000,
       },
     },
     {
@@ -82,6 +88,7 @@ const HomePage = () => {
         icon: <GoStarFill />,
         title: 'Salário',
         type: 'income',
+        goal: 1000,
       },
     },
     {
@@ -94,6 +101,7 @@ const HomePage = () => {
         icon: <GoStarFill />,
         title: 'Salário',
         type: 'income',
+        goal: 1000,
       },
     },
   ];
@@ -109,6 +117,7 @@ const HomePage = () => {
         icon: <AiFillHome />,
         title: 'Casa',
         type: 'expense',
+        goal: 2000,
       },
     },
     {
@@ -121,6 +130,7 @@ const HomePage = () => {
         icon: <AiFillHome />,
         title: 'Casa',
         type: 'expense',
+        goal: 2000,
       },
     },
     {
@@ -133,6 +143,7 @@ const HomePage = () => {
         icon: <IoSchool />,
         title: 'Educação',
         type: 'expense',
+        goal: 1000,
       },
     },
     {
@@ -145,6 +156,7 @@ const HomePage = () => {
         icon: <AiFillHome />,
         title: 'Casa',
         type: 'expense',
+        goal: 2000,
       },
     },
   ];

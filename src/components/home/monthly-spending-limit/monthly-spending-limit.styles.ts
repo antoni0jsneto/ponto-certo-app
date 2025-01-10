@@ -34,7 +34,7 @@ export const MonthlySpendingLimitItemContent = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
-  justify-content: start;
+  justify-content: center;
 `;
 
 export const MonthlySpendingLimitItemContent2 = styled.div`
@@ -48,8 +48,6 @@ export const MonthlySpendingLimitItemTitle = styled.p`
   font-size: 16px;
   line-height: 19px;
   text-align: start;
-  flex: 1;
-  margin-bottom: 3px;
 `;
 
 export const MonthlySpendingLimitItemSubtitle = styled.p`

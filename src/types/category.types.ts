@@ -6,6 +6,7 @@ interface Category {
   icon: ReactNode;
   title: string;
   type: string;
+  goal: number;
 }
 
 export default Category;
