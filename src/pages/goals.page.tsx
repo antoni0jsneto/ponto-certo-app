@@ -5,6 +5,7 @@ const GoalsPage = () => {
   return (
     <div>
       <Header />
+      <p>metas</p>
     </div>
   );
 };

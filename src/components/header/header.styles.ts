@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+interface HeaderProps {
+  isActive: boolean;
+}
+
 export const HeaderContainer = styled.div`
   width: 100%;
   display: flex;
@@ -46,15 +50,20 @@ export const HeaderItems = styled.div`
   }
 `;
 
-export const HeaderItem = styled.div`
+export const HeaderItem = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== 'isActive',
+})<HeaderProps>`
   font-weight: 600;
   font-size: 1rem;
   display: flex;
   gap: 2px;
   cursor: pointer;
 
-  &:hover,
-  &:active {
+  color: ${(props) => (props.isActive ? '#fff' : '#d3f4dc')};
+  font-weight: ${(props) => (props.isActive ? 'bold' : 'normal')};
+  border-bottom: ${(props) => (props.isActive ? `2px solid #fff` : 'none')};
+
+  &:hover {
     color: #fff;
     border-bottom: 2px solid #fff;
   }

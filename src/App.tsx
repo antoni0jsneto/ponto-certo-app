@@ -14,9 +14,9 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/" element={<IncomeExpensesPage />} />
-          <Route path="/" element={<ReportsPage />} />
-          <Route path="/" element={<GoalsPage />} />
+          <Route path="/lancamentos" element={<IncomeExpensesPage />} />
+          <Route path="/relatorios" element={<ReportsPage />} />
+          <Route path="/metas" element={<GoalsPage />} />
         </Routes>
       </BrowserRouter>
     </div>

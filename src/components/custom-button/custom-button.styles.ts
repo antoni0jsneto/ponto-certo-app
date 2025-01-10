@@ -11,6 +11,7 @@ interface CustomButtonProps {
 export const CustomButtonContainer = styled.button.withConfig({
   shouldForwardProp: (prop) =>
     ![
+      'textColor',
       'borderColor',
       'background',
       'hoverBackground',

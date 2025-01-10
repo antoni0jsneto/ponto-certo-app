@@ -4,6 +4,7 @@ const IncomeExpensesPage = () => {
   return (
     <div>
       <Header />
+      <p>lançamentos</p>
     </div>
   );
 };

@@ -12,8 +12,20 @@ import {
   HeaderTitle,
   NotificationIcon,
 } from './header.styles';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 const Header = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const [activeItem, setActiveItem] = useState(location.pathname);
+
+  const handleNavigation = (path: string) => {
+    navigate(path);
+    setActiveItem(path);
+  };
+
   return (
     <div
       style={{
@@ -24,16 +36,36 @@ const Header = () => {
       }}
     >
       <HeaderContainer>
-        <HeaderTitle>
+        <HeaderTitle onClick={() => handleNavigation('/')}>
           <CgSpinnerTwo size={30} />
           PONTO CERTO APP
         </HeaderTitle>
         <HeaderItemsContainer>
           <HeaderItems>
-            <HeaderItem>visão geral</HeaderItem>
-            <HeaderItem>lançamentos</HeaderItem>
-            <HeaderItem>relatórios</HeaderItem>
-            <HeaderItem>metas</HeaderItem>
+            <HeaderItem
+              onClick={() => handleNavigation('/')}
+              isActive={activeItem === '/'}
+            >
+              visão geral
+            </HeaderItem>
+            <HeaderItem
+              onClick={() => handleNavigation('/lancamentos')}
+              isActive={activeItem === '/lancamentos'}
+            >
+              lançamentos
+            </HeaderItem>
+            <HeaderItem
+              onClick={() => handleNavigation('/relatorios')}
+              isActive={activeItem === '/relatorios'}
+            >
+              relatórios
+            </HeaderItem>
+            <HeaderItem
+              onClick={() => handleNavigation('/metas')}
+              isActive={activeItem === '/metas'}
+            >
+              metas
+            </HeaderItem>
           </HeaderItems>
           <HeaderItems>
             <HeaderIcon>
