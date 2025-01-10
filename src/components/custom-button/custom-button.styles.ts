@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 interface CustomButtonProps {
+  textColor?: string;
   borderColor?: string;
   background?: string;
   hoverBackground?: string;
@@ -17,13 +18,14 @@ export const CustomButtonContainer = styled.button.withConfig({
     ].includes(prop),
 })<CustomButtonProps>`
   width: 100%;
-  padding: 10px 20px;
-  font-size: 1.1rem;
+  padding: 0 20px;
+  font-size: 15px;
   font-weight: 500;
-  border-radius: 5px;
-  border: 0.5px solid ${(props) => props.borderColor || '#A0A0A0'};
+  line-height: 38px;
+  border-radius: 6px;
+  border: 1px solid ${(props) => props.borderColor || '#ebebeb'};
   background: ${(props) => props.background || 'transparent'};
-  color: ${(props) => props.borderColor || '#A0A0A0'};
+  color: ${(props) => props.textColor || '#a0a0a0'};
   display: flex;
   align-items: center;
   justify-content: center;

@@ -25,11 +25,17 @@ const CustomButton: FunctionComponent<CustomButtonProps> = ({
   startIcon,
   ...rest
 }) => {
-  const { borderColor, background, hoverBackground, hoverTextColor } =
-    ButtonThemes[variant];
+  const {
+    textColor,
+    borderColor,
+    background,
+    hoverBackground,
+    hoverTextColor,
+  } = ButtonThemes[variant];
 
   return (
     <CustomButtonContainer
+      textColor={textColor}
       borderColor={borderColor}
       background={background}
       hoverBackground={hoverBackground}

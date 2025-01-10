@@ -1,9 +1,9 @@
 const ButtonThemes = {
   default: {
-    borderColor: '#A0A0A0',
+    borderColor: '#ebebeb',
     textColor: '#A0A0A0',
     background: 'transparent',
-    hoverBackground: '#A0A0A0',
+    hoverBackground: '#ebebeb',
     hoverTextColor: '#000000',
   },
   primary: {
