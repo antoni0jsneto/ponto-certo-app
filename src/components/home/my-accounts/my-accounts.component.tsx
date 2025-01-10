@@ -1,15 +1,7 @@
-// Utilities
-import { FaRegEye } from 'react-icons/fa6';
-
 // Styles
 import {
-  GeneralBalanceTitle,
-  GeneralBalanceSubtitle,
   MyAccountsContainer,
-  MyAccountsHeader,
-  GeneralBalance,
   MyAccountsDivisory,
-  MyAccountsContentTitle,
   MyAccountsContent,
   MyAccountsItems,
   MyAccountsItem,
@@ -23,21 +15,17 @@ import {
 } from './my-accounts.styles';
 
 // Components
-import CustomButton from '../custom-button/custom-button.component';
+import Title from '../../title/title.component';
+import CustomButton from '../../custom-button/custom-button.component';
+import GeneralBalance from '../general-balance/general-balance.component';
 
 const MyAccounts = () => {
   return (
     <MyAccountsContainer>
-      <MyAccountsHeader>
-        <GeneralBalanceTitle>Saldo geral</GeneralBalanceTitle>
-        <GeneralBalanceSubtitle>
-          R$ <GeneralBalance>0,00</GeneralBalance>
-          <FaRegEye />
-        </GeneralBalanceSubtitle>
-      </MyAccountsHeader>
+      <GeneralBalance title="Saldo geral" balance={0} />
       <MyAccountsDivisory></MyAccountsDivisory>
       <MyAccountsContent>
-        <MyAccountsContentTitle>Minhas contas</MyAccountsContentTitle>
+        <Title marginBottom="20px">Minhas contas</Title>
         <MyAccountsItems>
           <MyAccountsItem>
             <MyAccountsItemImgContainer>

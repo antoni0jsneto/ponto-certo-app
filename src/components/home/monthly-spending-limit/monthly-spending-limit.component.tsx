@@ -1,21 +1,25 @@
 import { FunctionComponent } from 'react';
+
+// Styles
 import {
   MonthlySpendingLimitContainer,
   MonthlySpendingLimitDivisory,
   MonthlySpendingLimitItem,
   MonthlySpendingLimitItemContent,
   MonthlySpendingLimitItemContent2,
-  MonthlySpendingLimitItemIcon,
   MonthlySpendingLimitItems,
   MonthlySpendingLimitItemsChart,
-  MonthlySpendingLimitItemsContainer,
   MonthlySpendingLimitItemSubtitle,
   MonthlySpendingLimitItemTitle,
-  MonthlySpendingLimitTitle,
 } from './monthly-spending-limit.styles';
-import NextAccount from '../../types/next-account.types';
+
+// Utilities
+import NextAccount from '../../../types/next-account.types';
 import { Cell, Pie, PieChart, Tooltip } from 'recharts';
-import CustomButton from '../custom-button/custom-button.component';
+
+// Components
+import CustomButton from '../../custom-button/custom-button.component';
+import Title from '../../title/title.component';
 
 interface MonthlySpendingLimitProps {
   title: string;
@@ -64,7 +68,7 @@ const MonthlySpendingLimit: FunctionComponent<MonthlySpendingLimitProps> = ({
 
   return (
     <MonthlySpendingLimitContainer>
-      <MonthlySpendingLimitTitle>{title}</MonthlySpendingLimitTitle>
+      <Title>{title}</Title>
       <MonthlySpendingLimitItems>
         {percentages.map((item, index) => (
           <div key={index}>

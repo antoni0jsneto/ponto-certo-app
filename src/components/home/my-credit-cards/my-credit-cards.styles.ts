@@ -6,40 +6,6 @@ export const MyCreditCardsContainer = styled.div`
   flex: 1;
 `;
 
-export const MyCreditCardsHeader = styled.div`
-  padding: 0 30px 0 14px;
-  display: flex;
-  flex-direction: column;
-  border-left: 3px solid var(--green-color);
-`;
-
-export const GeneralBalanceTitle = styled.p`
-  color: #858782;
-  font-size: 14px;
-  line-height: 15px;
-  font-weight: 400;
-  text-align: start;
-`;
-
-export const GeneralBalanceSubtitle = styled.p`
-  color: #858782;
-  font-size: 16px;
-  line-height: 20px;
-  font-weight: 400;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  margin-top: 4px;
-`;
-
-export const GeneralBalance = styled.span`
-  color: var(--text-black-color);
-  font-size: 20px;
-  line-height: 20px;
-  font-weight: 600;
-  margin: 0 12px 0 6px;
-`;
-
 export const MyCreditCardsDivisory = styled.div`
   border-bottom: 1px solid var(--line-color);
   width: 100%;
@@ -49,15 +15,6 @@ export const MyCreditCardsDivisory = styled.div`
 export const MyCreditCardsContent = styled.div`
   display: flex;
   flex-direction: column;
-`;
-
-export const MyCreditCardsContentTitle = styled.h2`
-  color: var(--text-black-color);
-  font-size: 17px;
-  font-weight: 600;
-  line-height: 17px;
-  text-align: start;
-  margin-bottom: 20px;
 `;
 
 export const MyCreditCardsItems = styled.div`

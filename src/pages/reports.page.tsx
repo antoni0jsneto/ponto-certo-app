@@ -1,5 +1,5 @@
 // Components
-import Header from '../../components/header/header.component';
+import Header from '../components/header/header.component';
 
 const ReportsPage = () => {
   return (

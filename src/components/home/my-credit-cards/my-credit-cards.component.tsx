@@ -1,16 +1,8 @@
-// Utilities
-import { FaRegEye } from 'react-icons/fa6';
-
 // Styles
 import {
-  GeneralBalance,
-  GeneralBalanceSubtitle,
-  GeneralBalanceTitle,
   MyCreditCardsContainer,
   MyCreditCardsContent,
-  MyCreditCardsContentTitle,
   MyCreditCardsDivisory,
-  MyCreditCardsHeader,
   MyCreditCardsItem,
   MyCreditCardsItemAvaliableLimitSubtitle,
   MyCreditCardsItemAvaliableLimitTitle,
@@ -28,21 +20,17 @@ import {
 } from './my-credit-cards.styles';
 
 // Components
-import CustomButton from '../custom-button/custom-button.component';
+import CustomButton from '../../custom-button/custom-button.component';
+import Title from '../../title/title.component';
+import GeneralBalance from '../general-balance/general-balance.component';
 
 const MyCreditCards = () => {
   return (
     <MyCreditCardsContainer>
-      <MyCreditCardsHeader>
-        <GeneralBalanceTitle>Faturas de Janeiro</GeneralBalanceTitle>
-        <GeneralBalanceSubtitle>
-          R$ <GeneralBalance>0,00</GeneralBalance>
-          <FaRegEye />
-        </GeneralBalanceSubtitle>
-      </MyCreditCardsHeader>
+      <GeneralBalance title="Faturas de Janeiro" balance={0} />
       <MyCreditCardsDivisory></MyCreditCardsDivisory>
       <MyCreditCardsContent>
-        <MyCreditCardsContentTitle>Meus Cartões</MyCreditCardsContentTitle>
+        <Title marginBottom="20px">Meus Cartões</Title>
         <MyCreditCardsItems>
           <MyCreditCardsItem>
             <MyCreditCardsItemImgContainer>

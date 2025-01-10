@@ -1,4 +1,3 @@
-import { color } from './../../../node_modules/@types/d3-color/index.d';
 import { styled } from 'styled-components';
 
 interface HigherExpensesProps {
@@ -9,15 +8,6 @@ export const HigherExpensesContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
-`;
-
-export const HigherExpensesTitle = styled.h2`
-  text-align: start;
-  color: var(--text-black-color);
-  font-size: 17px;
-  font-weight: 600;
-  line-height: 17px;
-  margin-bottom: 45px;
 `;
 
 export const HigherExpensesItemsContainer = styled.div``;

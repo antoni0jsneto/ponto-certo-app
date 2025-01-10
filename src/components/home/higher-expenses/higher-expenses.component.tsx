@@ -1,4 +1,6 @@
 import { FunctionComponent } from 'react';
+
+// Styles
 import {
   HigherExpensesContainer,
   HigherExpensesItem,
@@ -9,11 +11,15 @@ import {
   HigherExpensesItemsContainer,
   HigherExpensesItemSubtitle,
   HigherExpensesItemTitle,
-  HigherExpensesTitle,
 } from './higher-expenses.styles';
-import NextAccount from '../../types/next-account.types';
+
+// Utilities
 import { Cell, Pie, PieChart, Tooltip } from 'recharts';
-import CustomButton from '../custom-button/custom-button.component';
+import NextAccount from '../../../types/next-account.types';
+
+// Components
+import Title from '../../title/title.component';
+import CustomButton from '../../custom-button/custom-button.component';
 
 interface HigherExpensesProps {
   title: string;
@@ -62,7 +68,7 @@ const HigherExpenses: FunctionComponent<HigherExpensesProps> = ({
 
   return (
     <HigherExpensesContainer>
-      <HigherExpensesTitle>{title}</HigherExpensesTitle>
+      <Title>{title}</Title>
       <HigherExpensesItems>
         <HigherExpensesItemsContainer>
           {percentages.map((item, index) => (

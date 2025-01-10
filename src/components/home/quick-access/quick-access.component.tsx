@@ -7,8 +7,9 @@ import { LuCirclePlus } from 'react-icons/lu';
 import { BiTransfer } from 'react-icons/bi';
 import { BsBarChart } from 'react-icons/bs';
 
-// Component
-import QuickCustomButton from '../quick-custom-button/quick-custom-button.component';
+// Components
+import QuickCustomButton from '../../quick-custom-button/quick-custom-button.component';
+import Title from '../../title/title.component';
 
 const QuickAccess = () => {
   return (
@@ -30,7 +31,7 @@ const QuickAccess = () => {
       </div>
 
       <div className="quick-access-content">
-        <p>Acesso rápido</p>
+        <Title align="center">Acesso rápido</Title>
         <div className="block-of-buttons-content">
           <QuickCustomButton
             startIcon={<FiMinusCircle />}

@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 
 // Utilities
-import NextAccount from '../../types/next-account.types';
+import NextAccount from '../../../types/next-account.types';
 
 // Styles
 import {
@@ -15,8 +15,10 @@ import {
   NextAccountsItemIcon,
   NextAccountsItemsContainer,
   NextAccountstSubtitle,
-  NextAccountstTitle,
 } from './next-accounts.styles';
+
+// Components
+import Title from '../../title/title.component';
 
 interface NextAccountsProps {
   title: string;
@@ -30,7 +32,7 @@ const NextAccounts: FunctionComponent<NextAccountsProps> = ({
   return (
     <NextAccountsContainer>
       <NextAccountsHeader>
-        <NextAccountstTitle>{title}</NextAccountstTitle>
+        <Title>{title}</Title>
         <NextAccountstSubtitle>Próximas</NextAccountstSubtitle>
       </NextAccountsHeader>
 

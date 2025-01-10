@@ -15,15 +15,6 @@ export const NextAccountsHeader = styled.div`
   flex-direction: column;
 `;
 
-export const NextAccountstTitle = styled.h2`
-  text-align: start;
-  color: var(--text-black-color);
-  font-size: 17px;
-  font-weight: 600;
-  line-height: 17px;
-  margin-bottom: 45px;
-`;
-
 export const NextAccountstSubtitle = styled.p`
   text-align: center;
   background-color: #f8f8f8;

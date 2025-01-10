@@ -1,16 +1,6 @@
-// Components
-import Card from '../../components/card/card.component';
-import Container from '../../components/container/container.component';
-import Header from '../../components/header/header.component';
-import QuickAccess from '../../components/home/quick-access.component';
-import MyAccounts from '../../components/my-accounts/my-accounts.component';
-import MyCreditCards from '../../components/my-credit-cards/my-credit-cards.component';
-import NextAccounts from '../../components/next-accounts/next-accounts.component';
-import MonthlySpendingLimit from '../../components/monthly-spending-limit/monthly-spending-limit.component';
-
 // Utilities
-import NextAccount from '../../types/next-account.types';
-import Category from '../../types/category.types';
+import NextAccount from '../types/next-account.types';
+import Category from '../types/category.types';
 
 import { PiForkKnifeFill } from 'react-icons/pi';
 import { FaLaptopCode } from 'react-icons/fa6';
@@ -18,7 +8,17 @@ import { BiSolidDrink } from 'react-icons/bi';
 import { GoStarFill } from 'react-icons/go';
 import { AiFillHome } from 'react-icons/ai';
 import { IoSchool } from 'react-icons/io5';
-import HigherExpenses from '../../components/higher-expenses/higher-expenses.component';
+
+// Components
+import Card from '../components/card/card.component';
+import Container from '../components/container/container.component';
+import Header from '../components/header/header.component';
+import QuickAccess from '../components/home/quick-access/quick-access.component';
+import MyCreditCards from '../components/home/my-credit-cards/my-credit-cards.component';
+import NextAccounts from '../components/home/next-accounts/next-accounts.component';
+import MonthlySpendingLimit from '../components/home/monthly-spending-limit/monthly-spending-limit.component';
+import HigherExpenses from '../components/home/higher-expenses/higher-expenses.component';
+import MyAccounts from '../components/home/my-accounts/my-accounts.component';
 
 const HomePage = () => {
   const categories: Category[] = [
