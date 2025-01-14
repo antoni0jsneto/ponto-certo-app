@@ -20,11 +20,15 @@ export const MyCreditCardsContent = styled.div`
 export const MyCreditCardsItems = styled.div`
   display: flex;
   flex-direction: column;
+  margin-bottom: 40px;
 `;
 
-export const MyCreditCardsItem = styled.div`
+export const MyCreditCardsItem = styled.div``;
+
+export const MyCreditCardsItemCard = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 
 export const MyCreditCardsItemImgContainer = styled.div`
@@ -102,7 +106,7 @@ export const MyCreditCardsItemSeeBalanceContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 15px 0 40px 0;
+  margin: 15px 0 0 0;
   background-color: var(--body-background-color);
   border-radius: 24px;
   height: 72px;
