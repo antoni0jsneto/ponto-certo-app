@@ -1,7 +1,9 @@
+import React, { useState } from 'react';
 import { FunctionComponent } from 'react';
 
 // Utilities
 import NextAccount from '../../../types/next-account.types';
+import { IoMdArrowDropup, IoMdArrowDropdown } from 'react-icons/io';
 
 // Styles
 import {
@@ -15,20 +17,38 @@ import {
   NextAccountsItemIcon,
   NextAccountsItemsContainer,
   NextAccountstSubtitle,
+  SeeMoreButton,
 } from './next-accounts.styles';
 
 // Components
 import Title from '../../title/title.component';
+import { formatCurrencyWithSymbol } from '../../../utils/formatCurrency';
 
 interface NextAccountsProps {
   title: string;
   itens: NextAccount[];
+  initialLimit?: number;
+  incrementValue?: number;
 }
 
 const NextAccounts: FunctionComponent<NextAccountsProps> = ({
   title,
   itens,
+  initialLimit = 5,
+  incrementValue = 3,
 }) => {
+  const [visibleCount, setVisibleCount] = useState(initialLimit);
+
+  const handleToggleShow = () => {
+    if (visibleCount >= itens.length) {
+      setVisibleCount(initialLimit);
+    } else {
+      setVisibleCount((prevCount) =>
+        Math.min(prevCount + incrementValue, itens.length)
+      );
+    }
+  };
+
   return (
     <NextAccountsContainer>
       <NextAccountsHeader>
@@ -37,11 +57,8 @@ const NextAccounts: FunctionComponent<NextAccountsProps> = ({
       </NextAccountsHeader>
 
       <NextAccountsItemsContainer>
-        {itens.map((item, index) => {
-          const formattedPrice = item.value.toLocaleString('pt-BR', {
-            style: 'currency',
-            currency: 'BRL',
-          });
+        {itens.slice(0, visibleCount).map((item, index) => {
+          const formattedPrice = formatCurrencyWithSymbol(item.value);
 
           return (
             <div key={index}>
@@ -59,11 +76,35 @@ const NextAccounts: FunctionComponent<NextAccountsProps> = ({
                 </NextAccountsItemContent>
                 <p>{formattedPrice}</p>
               </NextAccountsItem>
-              {index < itens.length - 1 && <NextAccountsDivisory />}
+              {index < itens.filter((_, i) => i < visibleCount).length - 1 && (
+                <NextAccountsDivisory />
+              )}
             </div>
           );
         })}
       </NextAccountsItemsContainer>
+
+      <div
+        style={{
+          marginTop: '10px',
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      >
+        {itens.length > initialLimit && (
+          <SeeMoreButton onClick={handleToggleShow}>
+            {visibleCount >= itens.length ? (
+              <>
+                Ver Menos <IoMdArrowDropup />
+              </>
+            ) : (
+              <>
+                Ver Mais <IoMdArrowDropdown />
+              </>
+            )}
+          </SeeMoreButton>
+        )}
+      </div>
     </NextAccountsContainer>
   );
 };

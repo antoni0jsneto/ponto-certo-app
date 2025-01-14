@@ -81,3 +81,25 @@ export const NextAccountsItemContentValue = styled.p`
   color: #4d4d4d;
   font-size: 14px;
 `;
+
+export const SeeMoreButton = styled.button`
+  display: flex;
+  flex-shrink: 0;
+  background-color: transparent;
+  color: var(--gray-color);
+  height: 34px;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  padding: 0 13px;
+  transition: all 0.3s ease-in;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #eafced;
+    color: #6cbb79;
+  }
+`;
