@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 
 interface Category {
+  id: string;
   color: string;
   background: string;
   icon: ReactNode;
