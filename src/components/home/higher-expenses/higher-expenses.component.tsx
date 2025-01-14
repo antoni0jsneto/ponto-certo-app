@@ -20,6 +20,7 @@ import NextAccount from '../../../types/next-account.types';
 // Components
 import Title from '../../title/title.component';
 import CustomButton from '../../custom-button/custom-button.component';
+import { formatCurrencyWithSymbol } from '../../../utils/formatCurrency';
 
 interface HigherExpensesProps {
   title: string;
@@ -110,11 +111,8 @@ const HigherExpenses: FunctionComponent<HigherExpensesProps> = ({
             </Pie>
             <Tooltip
               formatter={(value: number, name: string) => [
-                new Intl.NumberFormat('pt-BR', {
-                  style: 'currency',
-                  currency: 'BRL',
-                }).format(value),
-                `${name}`,
+                formatCurrencyWithSymbol(value),
+                name,
               ]}
               contentStyle={{
                 backgroundColor: '#fff',
