@@ -1,25 +1,25 @@
 import { styled } from 'styled-components';
 
-export const IncomeExpensesHeaderContainer = styled.div`
+export const SubHeaderContainer = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-between;
 `;
 
-export const IncomeExpensesHeaderContent = styled.div`
+export const SubHeaderContent = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
 `;
 
-export const IncomeExpensesButtonContainer = styled.div`
+export const SubButtonContainer = styled.div`
   display: flex;
   margin-left: 10px;
   position: relative;
   height: 36px;
 `;
 
-export const IncomeExpensesButton = styled.button`
+export const SubButton = styled.button`
   color: #d72638;
   background-color: transparent;
   border: none;
@@ -30,7 +30,7 @@ export const IncomeExpensesButton = styled.button`
   cursor: pointer;
 `;
 
-export const IncomeExpensesDropdownList = styled.ul`
+export const SubDropdownList = styled.ul`
   position: absolute;
   top: 100%;
   left: 0;
@@ -46,7 +46,7 @@ export const IncomeExpensesDropdownList = styled.ul`
   z-index: 1;
 `;
 
-export const IncomeExpensesDropdownItem = styled.li`
+export const SubDropdownItem = styled.li`
   padding: 5px 18px;
   cursor: pointer;
   font-size: 13px;
@@ -71,7 +71,7 @@ export const IncomeExpensesDropdownItem = styled.li`
   }
 `;
 
-export const IncomeExpensesArrowButton = styled.button`
+export const SubArrowButton = styled.button`
   color: #5c5f5a;
   background-color: transparent;
   border: none;
@@ -88,7 +88,7 @@ export const IncomeExpensesArrowButton = styled.button`
   }
 `;
 
-export const IncomeExpensesMonthYear = styled.p`
+export const SubMonthYear = styled.p`
   color: #5c5f5a;
   font-size: 16px;
   text-align: start;

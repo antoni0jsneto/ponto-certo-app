@@ -13,7 +13,7 @@ import Card from '../components/card/card.component';
 import Container from '../components/container/container.component';
 import Header from '../components/header/header.component';
 import IncomeExpensesContent from '../components/income-expenses/income-expenses-content/income-expenses-content.component';
-import IncomeExpensesHeader from '../components/income-expenses/income-expenses-header/income-expenses-header.component';
+import SubHeader from '../components/sub-header/sub-header.component';
 
 const IncomeExpensesPage = () => {
   const accounts: Account[] = [
@@ -302,7 +302,7 @@ const IncomeExpensesPage = () => {
               width: '100%',
             }}
           >
-            <IncomeExpensesHeader />
+            <SubHeader showButton={true} />
             <IncomeExpensesContent incomes={incomes} expenses={expenses} />
           </div>
         </Card>
