@@ -37,8 +37,8 @@ const Header = () => {
     >
       <HeaderContainer>
         <HeaderTitle onClick={() => handleNavigation('/')}>
-          <CgSpinnerTwo size={30} />
-          PONTO CERTO APP
+          <CgSpinnerTwo size={40} />
+          ponto certo
         </HeaderTitle>
         <HeaderItemsContainer>
           <HeaderItems>

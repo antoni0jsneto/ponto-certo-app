@@ -14,6 +14,7 @@ export const HeaderContainer = styled.div`
 `;
 
 export const HeaderTitle = styled.h2`
+  font-family: 'Oxanium', serif;
   font-weight: bold;
   font-size: 1.5rem;
   display: flex;
