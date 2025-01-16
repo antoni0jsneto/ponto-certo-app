@@ -1,13 +1,13 @@
 // Components
 import Header from '../components/header/header.component';
 
-const GoalsPage = () => {
+const SpendingLimitPage = () => {
   return (
     <div>
       <Header />
-      <p>metas</p>
+      <p>limite de gastos</p>
     </div>
   );
 };
 
-export default GoalsPage;
+export default SpendingLimitPage;

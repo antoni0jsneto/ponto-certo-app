@@ -61,10 +61,10 @@ const Header = () => {
               relatórios
             </HeaderItem>
             <HeaderItem
-              onClick={() => handleNavigation('/metas')}
-              isActive={activeItem === '/metas'}
+              onClick={() => handleNavigation('/limite-de-gastos')}
+              isActive={activeItem === '/limite-de-gastos'}
             >
-              metas
+              limite de gastos
             </HeaderItem>
           </HeaderItems>
           <HeaderItems>
