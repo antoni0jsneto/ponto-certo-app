@@ -9,6 +9,21 @@ interface NextAccount {
   category: Category;
   account: Account;
   processed: boolean;
+  type: 'income' | 'expense';
+  repeat?: {
+    frequency:
+      | 'daily'
+      | 'weekly'
+      | 'biweekly'
+      | 'monthly'
+      | 'bimonthly'
+      | 'quarterly'
+      | 'semestral'
+      | 'yearly';
+    type: 'fixed' | 'installment';
+  };
+  observation?: string;
+  attachments?: string[];
 }
 
 export default NextAccount;
