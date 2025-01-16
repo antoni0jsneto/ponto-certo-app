@@ -8,7 +8,7 @@ export const GeneralBalanceHeader = styled.div`
 `;
 
 export const GeneralBalanceTitle = styled.p`
-  color: #858782;
+  color: var(--text-gray-dark-color);
   font-size: 14px;
   line-height: 15px;
   font-weight: 400;
@@ -16,7 +16,7 @@ export const GeneralBalanceTitle = styled.p`
 `;
 
 export const GeneralBalanceSubtitle = styled.p`
-  color: #858782;
+  color: var(--text-gray-dark-color);
   font-size: 16px;
   line-height: 20px;
   font-weight: 400;

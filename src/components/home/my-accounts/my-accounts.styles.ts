@@ -62,7 +62,7 @@ export const MyAccountsItemTitle = styled.p`
 `;
 
 export const MyAccountsItemSubtitle = styled.p`
-  color: #858782;
+  color: var(--text-gray-dark-color);
   font-size: 14px;
   font-weight: 400;
 `;

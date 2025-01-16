@@ -65,7 +65,7 @@ export const MyCreditCardsItemTitle = styled.p`
 `;
 
 export const MyCreditCardsItemSubtitle = styled.p`
-  color: #858782;
+  color: var(--text-gray-dark-color);
   font-size: 14px;
   font-weight: 400;
 `;
@@ -119,14 +119,14 @@ export const MyCreditCardsItemSeeBalanceContent = styled.div`
 `;
 
 export const MyCreditCardsItemAvaliableLimitTitle = styled.p`
-  color: #858782;
+  color: var(--text-gray-dark-color);
   font-size: 14px;
   font-weight: 400;
   margin-top: -4px;
 `;
 
 export const MyCreditCardsItemAvaliableLimitTitle2 = styled.p`
-  color: #858782;
+  color: var(--text-gray-dark-color);
   font-size: 16px;
   font-weight: 400;
   margin-top: -4px;

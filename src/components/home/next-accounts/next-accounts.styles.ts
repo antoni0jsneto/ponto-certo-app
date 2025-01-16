@@ -18,7 +18,7 @@ export const NextAccountsHeader = styled.div`
 export const NextAccountstSubtitle = styled.p`
   text-align: center;
   background-color: #f8f8f8;
-  color: #858782;
+  color: var(--text-gray-dark-color);
   border-radius: 6px;
   margin-bottom: 22px;
   font-size: 15px;
