@@ -5,12 +5,16 @@ import { ContainerContent, ContainerMaster } from './container.styles';
 
 interface ContainerProps {
   children: React.ReactNode;
+  maxWidth?: 'large' | 'medium';
 }
 
-const Container: FunctionComponent<ContainerProps> = ({ children }) => {
+const Container: FunctionComponent<ContainerProps> = ({
+  children,
+  maxWidth = 'medium',
+}) => {
   return (
     <ContainerMaster>
-      <ContainerContent>{children}</ContainerContent>
+      <ContainerContent maxWidth={maxWidth}>{children}</ContainerContent>
     </ContainerMaster>
   );
 };
