@@ -5,7 +5,7 @@ const ReportsPage = () => {
   return (
     <div>
       <Header />
-      <p>relatórios</p>
+      <p>em breve...</p>
     </div>
   );
 };
