@@ -302,7 +302,7 @@ const IncomeExpensesPage = () => {
               width: '100%',
             }}
           >
-            <SubHeader showButton={true} />
+            <SubHeader title="Lançamentos" showButton={true} />
             <div style={{ height: '20px' }}></div>
             <IncomeExpensesContent incomes={incomes} expenses={expenses} />
           </div>

@@ -21,10 +21,12 @@ import Title from '../title/title.component';
 
 interface SubHeaderProps {
   showButton?: boolean;
+  title: string;
 }
 
 const SubHeader: FunctionComponent<SubHeaderProps> = ({
   showButton = false,
+  title,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
@@ -41,7 +43,7 @@ const SubHeader: FunctionComponent<SubHeaderProps> = ({
   return (
     <SubHeaderContainer>
       <SubHeaderContent>
-        <Title marginBottom="0">Lançamentos</Title>
+        <Title marginBottom="0">{title}</Title>
 
         {showButton && (
           <SubButtonContainer style={{ position: 'relative' }}>

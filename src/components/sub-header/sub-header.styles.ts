@@ -4,6 +4,7 @@ export const SubHeaderContainer = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-between;
+  padding: 0 30px;
 `;
 
 export const SubHeaderContent = styled.div`
