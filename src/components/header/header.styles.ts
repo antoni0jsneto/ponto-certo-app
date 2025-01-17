@@ -10,7 +10,7 @@ export const HeaderContainer = styled.div`
   padding: 6px;
   color: #fffdf9;
   gap: 4rem;
-  max-width: var(--default-max-width);
+  max-width: var(--default-max-large-width);
 `;
 
 export const HeaderTitle = styled.h2`

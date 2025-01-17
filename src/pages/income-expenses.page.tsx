@@ -303,6 +303,7 @@ const IncomeExpensesPage = () => {
             }}
           >
             <SubHeader showButton={true} />
+            <div style={{ height: '20px' }}></div>
             <IncomeExpensesContent incomes={incomes} expenses={expenses} />
           </div>
         </Card>
