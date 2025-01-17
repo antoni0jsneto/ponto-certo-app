@@ -11,7 +11,8 @@
   height: 100vh;
 
   /* variables */
-  --default-max-width: 1079px;
+  --default-max-large-width: 1079px;
+  --default-max-medium-width: 800px;
   --body-background-color: #f2f4ef;
   --header-background-color: #16c64f;
   --card-background-color: #fefdf9;
