@@ -15,7 +15,7 @@ export const IncomeExpensesContentDayContainer = styled.div`
 
 export const IncomeExpensesContentDay = styled.p`
   position: absolute;
-  bottom: 0;
+  bottom: 20px;
   right: 60px;
   font-size: 21px;
   color: var(--text-gray-color);

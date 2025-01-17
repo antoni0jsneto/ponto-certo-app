@@ -69,7 +69,6 @@ const IncomeExpenseItem: FunctionComponent<IncomeExpenseItemProps> = ({
 }) => {
   return (
     <div>
-      {isNewDate && <IncomeExpensesContentDivisory />}
       <IncomeExpensesContentContainer>
         {isNewDate && (
           <IncomeExpensesContentDayContainer>
@@ -155,11 +154,14 @@ const IncomeExpensesContent: FunctionComponent<IncomeExpensesContentProps> = ({
   return (
     <IncomeExpensesContentItems>
       {incomeOrderedExpenses.map((item, index) => (
-        <IncomeExpenseItem
-          key={`${item.id}-${index}`}
-          item={item}
-          isNewDate={item.date !== incomeOrderedExpenses[index - 1]?.date}
-        />
+        <div key={`${item.id}-${index}`}>
+          {item.date !== incomeOrderedExpenses[index - 1]?.date &&
+            index > 0 && <IncomeExpensesContentDivisory />}
+          <IncomeExpenseItem
+            item={item}
+            isNewDate={item.date !== incomeOrderedExpenses[index - 1]?.date}
+          />
+        </div>
       ))}
       <IncomeExpensesContentDivisory />
       <IncomeExpensesContentFooter>
