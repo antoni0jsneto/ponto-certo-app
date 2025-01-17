@@ -289,12 +289,12 @@ const HomePage = () => {
   return (
     <div>
       <Header />
-      <Container>
+      <Container maxWidth="large">
         <Card width="100%">
           <QuickAccess incomes={incomes} expenses={expenses} />
         </Card>
       </Container>
-      <Container>
+      <Container maxWidth="large">
         {/* left div */}
         <div
           style={{
