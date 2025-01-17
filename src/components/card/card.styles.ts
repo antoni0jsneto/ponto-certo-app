@@ -9,8 +9,8 @@ export const CardContainer = styled.div.withConfig({
 })<CardProps>`
   display: flex;
   background-color: var(--card-background-color);
-  padding: 30px;
   border: 1px solid var(--body-background-color);
+  padding: 30px 0;
   box-shadow: 0px 41px 70px rgba(0, 0, 0, 0.03);
   border-radius: 8px;
   min-width: 150px;

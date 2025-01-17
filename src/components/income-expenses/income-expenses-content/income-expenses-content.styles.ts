@@ -7,6 +7,7 @@ interface IncomeExpensesContentProps {
 export const IncomeExpensesContentContainer = styled.div`
   display: flex;
   align-items: center;
+  padding: 0 30px;
 `;
 
 export const IncomeExpensesContentDayContainer = styled.div`
@@ -92,6 +93,7 @@ export const IncomeExpensesContentFooter = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 30px;
 `;
 
 export const IncomeExpensesContentFooterDiv = styled.div`

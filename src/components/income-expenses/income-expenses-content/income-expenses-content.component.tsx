@@ -156,13 +156,18 @@ const IncomeExpensesContent: FunctionComponent<IncomeExpensesContentProps> = ({
       {incomeOrderedExpenses.map((item, index) => (
         <div key={`${item.id}-${index}`}>
           {item.date !== incomeOrderedExpenses[index - 1]?.date &&
-            index > 0 && <IncomeExpensesContentDivisory />}
+            index > 0 && (
+              <div style={{ padding: '0 30px' }}>
+                <IncomeExpensesContentDivisory />
+              </div>
+            )}
           <IncomeExpenseItem
             item={item}
             isNewDate={item.date !== incomeOrderedExpenses[index - 1]?.date}
           />
         </div>
       ))}
+
       <IncomeExpensesContentDivisory />
       <IncomeExpensesContentFooter>
         <IncomeExpensesContentFooterTitle>

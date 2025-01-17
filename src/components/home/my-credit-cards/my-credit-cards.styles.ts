@@ -4,6 +4,7 @@ export const MyCreditCardsContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
+  padding: 0 30px;
 `;
 
 export const MyCreditCardsDivisory = styled.div`
