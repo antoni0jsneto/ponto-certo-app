@@ -3,8 +3,8 @@ const ButtonThemes = {
     borderColor: 'var(--line-color)',
     textColor: 'var(--text-gray-color)',
     background: 'transparent',
-    hoverBackground: 'var(--line-color)',
-    hoverTextColor: '#000000',
+    hoverBackground: 'var(--green-color)',
+    hoverTextColor: '#ffffff',
   },
   primary: {
     borderColor: '#007bff',
