@@ -3,10 +3,10 @@ import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 // Pages
-import HomePage from './pages/home.page';
-import ReportsPage from './pages/reports.page';
-import SpendingLimitPage from './pages/spending-limit.page';
-import IncomeExpensesPage from './pages/income-expenses.page';
+import HomePage from './pages/home/home.page';
+import ReportsPage from './pages/reports/reports.page';
+import SpendingLimitPage from './pages/spending-limit/spending-limit.page';
+import IncomeExpensesPage from './pages/income-expenses/income-expenses.page';
 
 function App() {
   return (

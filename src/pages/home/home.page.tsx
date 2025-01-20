@@ -1,8 +1,8 @@
 // Utilities
-import NextAccount from '../types/next-account.types';
-import Category from '../types/category.types';
-import CreditCard from '../types/credit-card.types';
-import Account from '../types/account.types';
+import NextAccount from '../../types/next-account.types';
+import Category from '../../types/category.types';
+import CreditCard from '../../types/credit-card.types';
+import Account from '../../types/account.types';
 
 import { PiForkKnifeFill } from 'react-icons/pi';
 import { FaGraduationCap, FaLaptopCode } from 'react-icons/fa6';
@@ -11,15 +11,15 @@ import { GoStarFill } from 'react-icons/go';
 import { AiFillHome } from 'react-icons/ai';
 
 // Components
-import Card from '../components/card/card.component';
-import Container from '../components/container/container.component';
-import Header from '../components/header/header.component';
-import QuickAccess from '../components/home/quick-access/quick-access.component';
-import MyCreditCards from '../components/home/my-credit-cards/my-credit-cards.component';
-import NextAccounts from '../components/home/next-accounts/next-accounts.component';
-import MonthlySpendingLimit from '../components/home/monthly-spending-limit/monthly-spending-limit.component';
-import HigherExpenses from '../components/home/higher-expenses/higher-expenses.component';
-import MyAccounts from '../components/home/my-accounts/my-accounts.component';
+import Card from '../../components/card/card.component';
+import Container from '../../components/container/container.component';
+import Header from '../../components/header/header.component';
+import QuickAccess from '../../components/home/quick-access/quick-access.component';
+import MyCreditCards from '../../components/home/my-credit-cards/my-credit-cards.component';
+import NextAccounts from '../../components/home/next-accounts/next-accounts.component';
+import MonthlySpendingLimit from '../../components/home/monthly-spending-limit/monthly-spending-limit.component';
+import HigherExpenses from '../../components/home/higher-expenses/higher-expenses.component';
+import MyAccounts from '../../components/home/my-accounts/my-accounts.component';
 
 const HomePage = () => {
   const accounts: Account[] = [

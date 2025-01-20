@@ -1,19 +1,19 @@
 // Components
-import SubHeader from '../components/sub-header/sub-header.component';
-import Card from '../components/card/card.component';
-import Header from '../components/header/header.component';
-import Container from '../components/container/container.component';
-import SpendingLimitContent from '../components/spending-limit-content/spending-limit-content.component';
+import SubHeader from '../../components/sub-header/sub-header.component';
+import Card from '../../components/card/card.component';
+import Header from '../../components/header/header.component';
+import Container from '../../components/container/container.component';
+import SpendingLimitContent from '../../components/spending-limit-content/spending-limit-content.component';
 
 // Utilities
 import { PiForkKnifeFill } from 'react-icons/pi';
-import Category from '../types/category.types';
-import Account from '../types/account.types';
+import Category from '../../types/category.types';
+import Account from '../../types/account.types';
 import { FaGraduationCap, FaLaptopCode } from 'react-icons/fa6';
 import { BiSolidDrink } from 'react-icons/bi';
 import { AiFillHome } from 'react-icons/ai';
 import { GoStarFill } from 'react-icons/go';
-import NextAccount from '../types/next-account.types';
+import NextAccount from '../../types/next-account.types';
 
 const SpendingLimitPage = () => {
   const accounts: Account[] = [
