@@ -7,6 +7,7 @@ import HomePage from './pages/home/home.page';
 import ReportsPage from './pages/reports/reports.page';
 import SpendingLimitPage from './pages/spending-limit/spending-limit.page';
 import IncomeExpensesPage from './pages/income-expenses/income-expenses.page';
+import LoginPage from './pages/login/login.page';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/lancamentos" element={<IncomeExpensesPage />} />
           <Route path="/relatorios" element={<ReportsPage />} />
           <Route path="/limite-de-gastos" element={<SpendingLimitPage />} />

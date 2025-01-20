@@ -82,6 +82,10 @@ export const HeaderIcon = styled.div`
   &:hover {
     color: #d3f4dc;
   }
+
+  &:last-child {
+    margin-left: 6px;
+  }
 `;
 
 export const NotificationIcon = styled.p`

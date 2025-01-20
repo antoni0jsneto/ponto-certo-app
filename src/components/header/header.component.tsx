@@ -14,6 +14,7 @@ import {
 } from './header.styles';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { FaUser } from 'react-icons/fa';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -76,7 +77,9 @@ const Header = () => {
               <NotificationIcon>5</NotificationIcon>
             </HeaderIcon>
 
-            {/* Perfil aqui */}
+            <HeaderIcon>
+              <FaUser size={22} onClick={() => handleNavigation('/login')} />
+            </HeaderIcon>
           </HeaderItems>
         </HeaderItemsContainer>
       </HeaderContainer>
