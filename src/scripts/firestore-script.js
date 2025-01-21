@@ -293,30 +293,33 @@ const transactions = [
   },
 ];
 
-const main = async () => {
+const addDataToFirestore = async (data, collectionName) => {
   await Promise.all(
-    categories.map(async (category) => {
-      await addDoc(collection(db, 'categories'), category);
-    })
-  );
-
-  await Promise.all(
-    accounts.map(async (account) => {
-      await addDoc(collection(db, 'accounts'), account);
-    })
-  );
-
-  await Promise.all(
-    creditCards.map(async (creditCard) => {
-      await addDoc(collection(db, 'creditCards'), creditCard);
-    })
-  );
-
-  await Promise.all(
-    transactions.map(async (transaction) => {
-      await addDoc(collection(db, 'transactions'), transaction);
+    data.map(async (item) => {
+      await addDoc(collection(db, collectionName), item);
     })
   );
 };
 
-main().then(() => process.exit());
+const main = async () => {
+  const dataMapping = {
+    categories,
+    accounts,
+    creditCards,
+    transactions,
+  };
+
+  for (const [collectionName, data] of Object.entries(dataMapping)) {
+    await addDataToFirestore(data, collectionName);
+  }
+};
+
+main()
+  .then(() => {
+    console.log('Dados adicionados com sucesso!');
+    process.exit();
+  })
+  .catch((error) => {
+    console.error('Erro ao adicionar dados:', error);
+    process.exit(1);
+  });
