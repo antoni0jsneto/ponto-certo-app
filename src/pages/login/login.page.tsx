@@ -19,6 +19,8 @@ import {
   RegisterLink,
   RememberLink,
 } from './login.styles';
+import InputErrorMessage from '../../components/input-error-message/input-error-message.component';
+import validator from 'validator';
 
 const LoginPage = () => {
   const {
@@ -57,8 +59,23 @@ const LoginPage = () => {
           <CustomInput
             hasError={!!errors?.email}
             placeholder=""
-            {...register('email', { required: true })}
+            {...register('email', {
+              required: true,
+              validate: (value) => {
+                return validator.isEmail(value);
+              },
+            })}
           />
+
+          {errors?.email?.type === 'required' && (
+            <InputErrorMessage>O e-mail é obrigatório.</InputErrorMessage>
+          )}
+
+          {errors?.email?.type === 'validate' && (
+            <InputErrorMessage>
+              Por favor, insira um e-mail válido.
+            </InputErrorMessage>
+          )}
         </LoginInputContainer>
 
         <LoginInputContainer>
@@ -69,6 +86,10 @@ const LoginPage = () => {
             {...register('password', { required: true })}
           />
           <RememberLink>Esqueci minha senha</RememberLink>
+
+          {errors?.password?.type === 'required' && (
+            <InputErrorMessage>A senha é obrigatória.</InputErrorMessage>
+          )}
         </LoginInputContainer>
 
         <CustomButton
