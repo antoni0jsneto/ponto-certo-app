@@ -4,6 +4,7 @@ import { FunctionComponent } from 'react';
 // Utilities
 import NextAccount from '../../../types/next-account.types';
 import { IoMdArrowDropup, IoMdArrowDropdown } from 'react-icons/io';
+import { formatCurrencyWithSymbol } from '../../../utils/formatCurrency';
 
 // Styles
 import {
@@ -22,7 +23,7 @@ import {
 
 // Components
 import Title from '../../title/title.component';
-import { formatCurrencyWithSymbol } from '../../../utils/formatCurrency';
+import ReactIcon from '../../react-icon/react-icon.component';
 
 interface NextAccountsProps {
   title: string;
@@ -64,7 +65,7 @@ const NextAccounts: FunctionComponent<NextAccountsProps> = ({
             <div key={index}>
               <NextAccountsItem>
                 <NextAccountsItemIcon backgroundIcon={item.category.background}>
-                  {item.category.icon}
+                  <ReactIcon name={item.category.icon.name} />
                 </NextAccountsItemIcon>
                 <NextAccountsItemContent>
                   <NextAccountsItemContentTitle>

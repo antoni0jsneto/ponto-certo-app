@@ -48,7 +48,12 @@ const MonthlySpendingLimit: FunctionComponent<MonthlySpendingLimitProps> = ({
     },
     {} as Record<
       string,
-      { value: number; goal: number; icon: React.ReactNode; background: string }
+      {
+        value: number;
+        goal: number;
+        icon: { library: string; name: string };
+        background: string;
+      }
     >
   );
 

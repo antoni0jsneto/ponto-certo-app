@@ -1,4 +1,7 @@
-import { FunctionComponent, ReactNode } from 'react';
+import React from 'react';
+import { FunctionComponent, useEffect, useState } from 'react';
+import { MdEdit } from 'react-icons/md';
+import { FaPlus } from 'react-icons/fa';
 
 // Styles
 import {
@@ -22,19 +25,22 @@ import {
 } from './spending-limit-content.styles';
 
 // Utilities
-import { MdEdit } from 'react-icons/md';
-import { FaPlus } from 'react-icons/fa';
 import { formatCurrencyWithoutSymbol } from '../../utils/formatCurrency';
 import Category from '../../types/category.types';
 import NextAccount from '../../types/next-account.types';
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { db } from '../../config/firebase.config';
 
-interface SpendingLimitContentProps {
-  categories: Category[];
-  expenses: NextAccount[];
-}
+// Components
+import ReactIcon from '../react-icon/react-icon.component';
+
+interface SpendingLimitContentProps {}
 
 interface CategorySummary {
-  icon: ReactNode;
+  icon: {
+    library: string;
+    name: string;
+  };
   background: string;
   name: string;
   value: number;
@@ -66,10 +72,54 @@ const calculateCategorySummaries = (
   }, {});
 };
 
-const SpendingLimitContent: FunctionComponent<SpendingLimitContentProps> = ({
-  categories,
-  expenses,
-}) => {
+const SpendingLimitContent: FunctionComponent<
+  SpendingLimitContentProps
+> = () => {
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [expenses, setExpenses] = useState<NextAccount[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [categoriesSnapshot, expensesSnapshot] = await Promise.all([
+          getDocs(collection(db, 'categories')),
+          getDocs(
+            query(
+              collection(db, 'transactions'),
+              where('type', '==', 'expense')
+            )
+          ),
+        ]);
+
+        const categoriesData = categoriesSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        })) as Category[];
+
+        const expensesData = expensesSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        })) as NextAccount[];
+
+        setCategories((prev) =>
+          JSON.stringify(prev) === JSON.stringify(categoriesData)
+            ? prev
+            : categoriesData
+        );
+
+        setExpenses((prev) =>
+          JSON.stringify(prev) === JSON.stringify(expensesData)
+            ? prev
+            : expensesData
+        );
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   // Totals
   const totalExpenses = expenses.reduce((acc, { value }) => acc + value, 0);
   const totalLimit = expenses.reduce(
@@ -106,7 +156,7 @@ const SpendingLimitContent: FunctionComponent<SpendingLimitContentProps> = ({
   }) => (
     <SpendingLimitContentItem>
       <SpendingLimitContentItemIcon backgroundIcon={background}>
-        {icon}
+        <ReactIcon name={icon.name} />
       </SpendingLimitContentItemIcon>
       <SpendingLimitContentItemContainer>
         <SpendingLimitContentItemContent>

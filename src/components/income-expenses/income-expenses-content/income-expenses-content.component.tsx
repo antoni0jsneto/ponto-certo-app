@@ -1,8 +1,9 @@
+import React from 'react';
 import { FunctionComponent } from 'react';
-
-// Utilities
 import { HiHandThumbUp, HiHandThumbDown } from 'react-icons/hi2';
 import { FaPlus } from 'react-icons/fa';
+
+// Utilities
 import NextAccount from '../../../types/next-account.types';
 import { formatCurrencyWithSymbol } from '../../../utils/formatCurrency';
 
@@ -28,6 +29,9 @@ import {
   IncomeExpensesContentItemTitle,
   IncomeExpensesContentItemType,
 } from './income-expenses-content.styles';
+
+// Components
+import ReactIcon from '../../react-icon/react-icon.component';
 
 interface IncomeExpensesContentProps {
   incomes: NextAccount[];
@@ -84,7 +88,7 @@ const IncomeExpenseItem: FunctionComponent<IncomeExpenseItemProps> = ({
             <IncomeExpensesContentItemIcon
               backgroundColor={item.category.background}
             >
-              {item.category.icon}
+              <ReactIcon name={item.category.icon.name} />
             </IncomeExpensesContentItemIcon>
             <IncomeExpensesContentItemTitle>
               {item.title}

@@ -1,3 +1,4 @@
+import React from 'react';
 import { FunctionComponent } from 'react';
 
 // Styles
@@ -16,11 +17,12 @@ import {
 // Utilities
 import { Cell, Pie, PieChart, Tooltip } from 'recharts';
 import NextAccount from '../../../types/next-account.types';
+import { formatCurrencyWithSymbol } from '../../../utils/formatCurrency';
 
 // Components
 import Title from '../../title/title.component';
 import CustomButton from '../../custom-button/custom-button.component';
-import { formatCurrencyWithSymbol } from '../../../utils/formatCurrency';
+import ReactIcon from '../../react-icon/react-icon.component';
 
 interface HigherExpensesProps {
   title: string;
@@ -48,7 +50,11 @@ const HigherExpenses: FunctionComponent<HigherExpensesProps> = ({
     },
     {} as Record<
       string,
-      { value: number; icon: React.ReactNode; background: string }
+      {
+        value: number;
+        icon: { library: string; name: string };
+        background: string;
+      }
     >
   );
 
@@ -76,7 +82,7 @@ const HigherExpenses: FunctionComponent<HigherExpensesProps> = ({
             <HigherExpensesItemContainer key={index}>
               <HigherExpensesItem>
                 <HigherExpensesItemIcon backgroundIcon={item.background}>
-                  {item.icon}
+                  <ReactIcon name={item.icon.name} />
                 </HigherExpensesItemIcon>
                 <HigherExpensesItemTitle>
                   {item.category}
