@@ -8,6 +8,7 @@ import ReportsPage from './pages/reports/reports.page';
 import SpendingLimitPage from './pages/spending-limit/spending-limit.page';
 import IncomeExpensesPage from './pages/income-expenses/income-expenses.page';
 import LoginPage from './pages/login/login.page';
+import RegisterPage from './pages/register/register.page';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/cadastrar" element={<RegisterPage />} />
           <Route path="/lancamentos" element={<IncomeExpensesPage />} />
           <Route path="/relatorios" element={<ReportsPage />} />
           <Route path="/limite-de-gastos" element={<SpendingLimitPage />} />
