@@ -83,6 +83,7 @@ const LoginPage = () => {
           <CustomInput
             hasError={!!errors?.password}
             placeholder=""
+            type="password"
             {...register('password', { required: true })}
           />
           <RememberLink>Esqueci minha senha</RememberLink>

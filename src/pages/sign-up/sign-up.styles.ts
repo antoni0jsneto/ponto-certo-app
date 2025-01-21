@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+interface RegisterProps {
+  hasError?: boolean;
+}
+
 export const RegisterContainer = styled.div`
   height: 100vh;
   display: flex;
@@ -56,13 +60,11 @@ export const RegisterSubtitle = styled.p`
 
 export const RegisterInputContainer = styled.div`
   width: 100%;
-  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
 
   p:nth-child(1) {
     font-weight: 600;
-    margin-bottom: 5px;
     text-align: start;
   }
 
@@ -73,20 +75,26 @@ export const RegisterInputContainer = styled.div`
 
 export const PasswordContainer = styled.div`
   display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+
+export const PasswordContent = styled.div`
+  display: flex;
   width: 100%;
   gap: 10px;
 
   p {
     font-weight: 600;
-    margin-bottom: 5px;
     text-align: start;
     flex: 1;
   }
 `;
 
-export const RegisterTermsContainer = styled.div`
+export const RegisterTermsContainer = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== 'hasError',
+})<RegisterProps>`
   width: 100%;
-  margin-bottom: 20px;
   display: flex;
   gap: 10px;
   font-size: 0.875rem;
@@ -101,13 +109,16 @@ export const RegisterTermsContainer = styled.div`
     text-decoration: underline;
     font-weight: 500;
     cursor: pointer;
+    color: ${(props) =>
+      props.hasError ? 'var(--red-color)' : 'rgb(105, 105, 105)'};
   }
 
   input {
     appearance: none;
     width: 20px;
     height: 20px;
-    border: 2px solid #d1d5db;
+    border: 2px solid
+      ${(props) => (props.hasError ? 'var(--red-color)' : '#d1d5db')};
     border-radius: 4px;
     background-color: #f9fafb;
     cursor: pointer;
