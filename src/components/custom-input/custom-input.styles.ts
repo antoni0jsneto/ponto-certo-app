@@ -10,7 +10,6 @@ export const CustomInputContainer = styled.input.withConfig({
   border: none;
   width: 100%;
   /* background-color: #e9ecef; */
-  border: 1px solid var(--line-color);
   background-color: transparent;
   padding-right: 20px;
   padding-left: 20px;
@@ -19,7 +18,8 @@ export const CustomInputContainer = styled.input.withConfig({
   /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
   border-radius: 10px;
   color: '#343a40';
-  /* border: ${(props) => (props.hasError ? '2px solid #FF6A6A' : 'none')}; */
+  border: ${(props) =>
+    props.hasError ? '2px solid #FF6A6A' : '1px solid var(--gray-color)'};
 
   &::placeholder {
     color: ${(props) => (props.hasError ? '#FF6A6A' : '#6C757D')};

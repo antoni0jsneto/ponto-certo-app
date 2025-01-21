@@ -1,8 +1,12 @@
 import { FcGoogle } from 'react-icons/fc';
 import { FiLogIn } from 'react-icons/fi';
+import { CgSpinnerTwo } from 'react-icons/cg';
+import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 
 // Components
 import CustomButton from '../../components/custom-button/custom-button.component';
+import CustomInput from '../../components/custom-input/custom-input.component';
 
 // Styles
 import {
@@ -15,16 +19,23 @@ import {
   RegisterLink,
   RememberLink,
 } from './login.styles';
-import CustomInput from '../../components/custom-input/custom-input.component';
-import { CgSpinnerTwo } from 'react-icons/cg';
-import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
   const navigate = useNavigate();
 
   const handleRegisterClick = () => {
     navigate('/cadastrar');
   };
+
+  const handleSubmitPress = (data: any) => {
+    console.log({ data });
+  };
+  console.log({ errors });
 
   return (
     <LoginContainer>
@@ -43,16 +54,28 @@ const LoginPage = () => {
 
         <LoginInputContainer>
           <p style={{ color: '#4d4d4d' }}>Seu e-mail</p>
-          <CustomInput placeholder="" />
+          <CustomInput
+            hasError={!!errors?.email}
+            placeholder=""
+            {...register('email', { required: true })}
+          />
         </LoginInputContainer>
 
         <LoginInputContainer>
           <p style={{ color: '#4d4d4d' }}>Sua senha</p>
-          <CustomInput placeholder="" />
+          <CustomInput
+            hasError={!!errors?.password}
+            placeholder=""
+            {...register('password', { required: true })}
+          />
           <RememberLink>Esqueci minha senha</RememberLink>
         </LoginInputContainer>
 
-        <CustomButton variant="success" startIcon={<FiLogIn size={18} />}>
+        <CustomButton
+          variant="success"
+          startIcon={<FiLogIn size={18} />}
+          onClick={() => handleSubmit(handleSubmitPress)()}
+        >
           Entrar
         </CustomButton>
       </LoginContent>
