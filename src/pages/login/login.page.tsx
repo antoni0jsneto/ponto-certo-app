@@ -12,11 +12,20 @@ import {
   LoginInputContainer,
   LoginSubtitle,
   Logomarca,
+  RegisterLink,
+  RememberLink,
 } from './login.styles';
 import CustomInput from '../../components/custom-input/custom-input.component';
 import { CgSpinnerTwo } from 'react-icons/cg';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+
+  const handleRegisterClick = () => {
+    navigate('/cadastrar');
+  };
+
   return (
     <LoginContainer>
       <Logomarca>
@@ -34,18 +43,23 @@ const LoginPage = () => {
 
         <LoginInputContainer>
           <p style={{ color: '#4d4d4d' }}>Seu e-mail</p>
-          <CustomInput placeholder="Digite seu e-mail" />
+          <CustomInput placeholder="" />
         </LoginInputContainer>
 
         <LoginInputContainer>
           <p style={{ color: '#4d4d4d' }}>Sua senha</p>
-          <CustomInput placeholder="Digite sua senha" />
+          <CustomInput placeholder="" />
+          <RememberLink>Esqueci minha senha</RememberLink>
         </LoginInputContainer>
 
         <CustomButton variant="success" startIcon={<FiLogIn size={18} />}>
           Entrar
         </CustomButton>
       </LoginContent>
+      <RegisterLink>
+        Ainda não possui conta?{' '}
+        <span onClick={handleRegisterClick}>Faça o cadastro!</span>
+      </RegisterLink>
     </LoginContainer>
   );
 };

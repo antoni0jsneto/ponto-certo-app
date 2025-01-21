@@ -66,3 +66,37 @@ export const LoginInputContainer = styled.div`
     text-align: start;
   }
 `;
+
+export const RememberLink = styled.p`
+  color: var(--text-gray-color);
+  text-align: start;
+  font-size: 0.875rem;
+  width: 100%;
+
+  &:hover {
+    text-decoration: underline;
+    color: var(--green-color);
+    cursor: pointer;
+  }
+`;
+
+export const RegisterLink = styled.p`
+  text-align: center;
+  color: var(--text-gray-color);
+  position: absolute;
+  bottom: 0;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+
+  span {
+    color: var(--green-color);
+    text-decoration: underline;
+    font-weight: 500;
+    transition: filter 0.3s ease;
+
+    &:hover {
+      cursor: pointer;
+      filter: brightness(1.2);
+    }
+  }
+`;
