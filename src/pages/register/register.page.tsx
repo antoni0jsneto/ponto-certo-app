@@ -61,11 +61,7 @@ const RegisterPage = () => {
           </PasswordContainer>
 
           <RegisterTermsContainer>
-            <CustomInput
-              style={{ width: '15px' }}
-              type="checkbox"
-              placeholder=""
-            />
+            <input type="checkbox" className="checkbox" />
             <p>
               Li e concordo com os <span>termos de uso</span>
             </p>

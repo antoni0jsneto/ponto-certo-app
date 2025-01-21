@@ -96,4 +96,47 @@ export const RegisterTermsContainer = styled.div`
     color: rgb(105, 105, 105);
     text-align: start;
   }
+
+  span {
+    text-decoration: underline;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  input {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #d1d5db;
+    border-radius: 4px;
+    background-color: #f9fafb;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+
+    &:hover {
+      border-color: #4caf50;
+      background-color: #e6f7ec;
+    }
+
+    &:checked {
+      background-color: #4caf50;
+      border-color: #4caf50;
+    }
+
+    &:checked::after {
+      content: '✔';
+      font-size: 14px;
+      color: white;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      line-height: 1;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
 `;
