@@ -44,7 +44,6 @@ const LoginPage = () => {
   const handleSubmitPress = (data: LoginForm) => {
     console.log({ data });
   };
-  console.log({ errors });
 
   return (
     <LoginContainer>

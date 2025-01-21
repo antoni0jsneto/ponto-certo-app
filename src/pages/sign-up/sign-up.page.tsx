@@ -53,7 +53,6 @@ const SignUpPage = () => {
   const handleSubmitPress = (data: SignUpForm) => {
     console.log({ data });
   };
-  console.log({ errors });
 
   return (
     <RegisterContainer>
