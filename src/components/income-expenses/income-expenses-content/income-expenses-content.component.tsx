@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FunctionComponent } from 'react';
 import { HiHandThumbUp, HiHandThumbDown } from 'react-icons/hi2';
 import { FaPlus } from 'react-icons/fa';
@@ -6,6 +6,8 @@ import { FaPlus } from 'react-icons/fa';
 // Utilities
 import NextAccount from '../../../types/next-account.types';
 import { formatCurrencyWithSymbol } from '../../../utils/formatCurrency';
+import { query, collection, where, getDocs } from 'firebase/firestore';
+import { db } from '../../../config/firebase.config';
 
 // Styles
 import {
@@ -33,12 +35,7 @@ import {
 // Components
 import ReactIcon from '../../react-icon/react-icon.component';
 
-interface IncomeExpensesContentProps {
-  incomes: NextAccount[];
-  expenses: NextAccount[];
-}
-
-interface IncomeExpenseItemProps {
+interface IncomeExpensesItemProps {
   item: NextAccount;
   isNewDate: boolean;
 }
@@ -67,7 +64,7 @@ const getDay = (date: string) =>
   String(new Date(date).getUTCDate()).padStart(2, '0');
 
 // Component to render an individual income/expense item
-const IncomeExpenseItem: FunctionComponent<IncomeExpenseItemProps> = ({
+const IncomeExpenseItem: FunctionComponent<IncomeExpensesItemProps> = ({
   item,
   isNewDate,
 }) => {
@@ -119,10 +116,29 @@ const IncomeExpenseItem: FunctionComponent<IncomeExpenseItemProps> = ({
 };
 
 // Main component
-const IncomeExpensesContent: FunctionComponent<IncomeExpensesContentProps> = ({
-  incomes,
-  expenses,
-}) => {
+const IncomeExpensesContent: FunctionComponent = () => {
+  const [income, setIncome] = useState<NextAccount[]>([]);
+  const [expenses, setExpenses] = useState<NextAccount[]>([]);
+
+  useEffect(() => {
+    const incomeQuery = query(
+      collection(db, 'transactions'),
+      where('type', '==', 'income')
+    );
+    const expensesQuery = query(
+      collection(db, 'transactions'),
+      where('type', '==', 'expense')
+    );
+    getDocs(incomeQuery).then((snapshot) => {
+      const data = snapshot.docs.map((doc) => doc.data() as NextAccount);
+      setIncome(data);
+    });
+    getDocs(expensesQuery).then((snapshot) => {
+      const data = snapshot.docs.map((doc) => doc.data() as NextAccount);
+      setExpenses(data);
+    });
+  }, []);
+
   // Filter and sum helper functions
   const filterByMonth = (data: NextAccount[], processed: boolean) =>
     data.filter(
@@ -133,9 +149,9 @@ const IncomeExpensesContent: FunctionComponent<IncomeExpensesContentProps> = ({
     data.reduce((acc, item) => acc + item.value, 0);
 
   // Filtered and summed data
-  const processedIncomes = filterByMonth(incomes, true);
+  const processedIncomes = filterByMonth(income, true);
   const processedExpenses = filterByMonth(expenses, true);
-  const unprocessedIncomes = filterByMonth(incomes, false);
+  const unprocessedIncomes = filterByMonth(income, false);
   const unprocessedExpenses = filterByMonth(expenses, false);
 
   const totalIncome = sumValues(processedIncomes);
@@ -143,7 +159,7 @@ const IncomeExpensesContent: FunctionComponent<IncomeExpensesContentProps> = ({
   const totalPredictedIncome = sumValues(unprocessedIncomes);
   const totalPredictedExpense = sumValues(unprocessedExpenses);
 
-  const incomeExpenses = [...incomes, ...expenses].filter((item) => {
+  const incomeExpenses = [...income, ...expenses].filter((item) => {
     const isIncluded = includesMonth(item.date);
     return isIncluded;
   });
