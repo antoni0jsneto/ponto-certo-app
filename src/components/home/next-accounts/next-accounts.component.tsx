@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FunctionComponent } from 'react';
 
 // Utilities
@@ -24,21 +24,43 @@ import {
 // Components
 import Title from '../../title/title.component';
 import ReactIcon from '../../react-icon/react-icon.component';
+import { getDocs, collection, query, where } from 'firebase/firestore';
+import { db } from '../../../config/firebase.config';
 
 interface NextAccountsProps {
   title: string;
-  itens: NextAccount[];
+  type: 'expense' | 'income';
   initialLimit?: number;
   incrementValue?: number;
 }
 
 const NextAccounts: FunctionComponent<NextAccountsProps> = ({
   title,
-  itens,
+  type,
   initialLimit = 5,
   incrementValue = 3,
 }) => {
   const [visibleCount, setVisibleCount] = useState(initialLimit);
+  const [itens, setItens] = useState<NextAccount[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const snapshot = await getDocs(
+          query(collection(db, 'transactions'), where('type', '==', type))
+        );
+        const data = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        })) as NextAccount[];
+        setItens(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleToggleShow = () => {
     if (visibleCount >= itens.length) {

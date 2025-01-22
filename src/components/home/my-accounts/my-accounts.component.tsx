@@ -1,4 +1,4 @@
-import { Fragment, FunctionComponent } from 'react';
+import { Fragment, FunctionComponent, useEffect, useState } from 'react';
 
 // Styles
 import {
@@ -25,22 +25,66 @@ import GeneralBalance from '../general-balance/general-balance.component';
 import Account from '../../../types/account.types';
 import NextAccount from '../../../types/next-account.types';
 import { formatCurrencyWithSymbol } from '../../../utils/formatCurrency';
+import { getDocs, collection, query, where } from 'firebase/firestore';
+import { db } from '../../../config/firebase.config';
 
-interface MyAccountsProps {
-  accounts: Account[];
-  incomes: NextAccount[];
-  expenses: NextAccount[];
-}
+interface MyAccountsProps {}
 
-const MyAccounts: FunctionComponent<MyAccountsProps> = ({
-  accounts,
-  incomes,
-  expenses,
-}) => {
-  const groupedIncomes = incomes.reduce(
-    (acc, income) => {
-      if (income.processed) {
-        acc[income.account.id] = (acc[income.account.id] || 0) + income.value;
+const MyAccounts: FunctionComponent<MyAccountsProps> = ({}) => {
+  const [accounts, setAccounts] = useState<Account[]>([]);
+  const [income, setIncome] = useState<NextAccount[]>([]);
+  const [expenses, setExpenses] = useState<NextAccount[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [accountsSnapshot, incomeSnapshot, expensesSnapshot] =
+          await Promise.all([
+            getDocs(collection(db, 'accounts')),
+            getDocs(
+              query(
+                collection(db, 'transactions'),
+                where('type', '==', 'income')
+              )
+            ),
+            getDocs(
+              query(
+                collection(db, 'transactions'),
+                where('type', '==', 'expense')
+              )
+            ),
+          ]);
+
+        const accountsData = accountsSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        })) as Account[];
+
+        const incomeData = incomeSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        })) as NextAccount[];
+
+        const expensesData = expensesSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        })) as NextAccount[];
+
+        setAccounts(accountsData);
+        setIncome(incomeData);
+        setExpenses(expensesData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const groupedIncomes = income.reduce(
+    (acc, i) => {
+      if (i.processed) {
+        acc[i.account.id] = (acc[i.account.id] || 0) + i.value;
       }
       return acc;
     },

@@ -1,3 +1,5 @@
+import { Fragment, FunctionComponent, useEffect, useState } from 'react';
+
 // Styles
 import {
   MyCreditCardsContainer,
@@ -20,25 +22,50 @@ import {
   MyCreditCardsItemTitleContainer,
 } from './my-credit-cards.styles';
 
+// Utilities
+import CreditCard from '../../../types/credit-card.types';
+import { formatCurrencyWithoutSymbol } from '../../../utils/formatCurrency';
+import NextAccount from '../../../types/next-account.types';
+import { getCurrentAndNextMonth } from '../../../utils/getMonth';
+import { getDocs, collection, query, where } from 'firebase/firestore';
+import { db } from '../../../config/firebase.config';
+
 // Components
 import CustomButton from '../../custom-button/custom-button.component';
 import Title from '../../title/title.component';
 import GeneralBalance from '../general-balance/general-balance.component';
-import CreditCard from '../../../types/credit-card.types';
-import { Fragment, FunctionComponent } from 'react';
-import { formatCurrencyWithoutSymbol } from '../../../utils/formatCurrency';
-import NextAccount from '../../../types/next-account.types';
-import { getCurrentAndNextMonth } from '../../../utils/getMonth';
 
-interface MyCreditCardsProps {
-  itens: CreditCard[];
-  expenses: NextAccount[];
-}
+interface MyCreditCardsProps {}
 
-const MyCreditCards: FunctionComponent<MyCreditCardsProps> = ({
-  itens,
-  expenses,
-}) => {
+const MyCreditCards: FunctionComponent<MyCreditCardsProps> = () => {
+  const [itens, setItens] = useState<CreditCard[]>([]);
+  const [expenses, setExpenses] = useState<NextAccount[]>([]);
+
+  useEffect(() => {
+    const fetchItens = async () => {
+      const [itensSnapshot, expensesSnapshot] = await Promise.all([
+        getDocs(collection(db, 'creditCards')),
+        getDocs(
+          query(collection(db, 'transactions'), where('type', '==', 'expense'))
+        ),
+      ]);
+
+      const itensData = itensSnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      })) as CreditCard[];
+
+      const expensesData = expensesSnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      })) as NextAccount[];
+
+      setItens(itensData);
+      setExpenses(expensesData);
+    };
+    fetchItens();
+  }, []);
+
   const { currentMonth, nextMonth } = getCurrentAndNextMonth();
   const date = new Date();
   const day = date.getDate();
