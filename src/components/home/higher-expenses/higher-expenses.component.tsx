@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FunctionComponent } from 'react';
 
 // Styles
@@ -18,6 +18,8 @@ import {
 import { Cell, Pie, PieChart, Tooltip } from 'recharts';
 import NextAccount from '../../../types/next-account.types';
 import { formatCurrencyWithSymbol } from '../../../utils/formatCurrency';
+import { getDocs, query, collection, where } from 'firebase/firestore';
+import { db } from '../../../config/firebase.config';
 
 // Components
 import Title from '../../title/title.component';
@@ -26,13 +28,39 @@ import ReactIcon from '../../react-icon/react-icon.component';
 
 interface HigherExpensesProps {
   title: string;
-  expenses: NextAccount[];
 }
 
-const HigherExpenses: FunctionComponent<HigherExpensesProps> = ({
-  title,
-  expenses,
-}) => {
+const HigherExpenses: FunctionComponent<HigherExpensesProps> = ({ title }) => {
+  const [expenses, setExpenses] = useState<NextAccount[]>([]);
+
+  useEffect(() => {
+    const fetchExpenses = async () => {
+      const year = 2025;
+      const month = 0;
+      const lastDay = new Date(year, month + 1, 0);
+      const firstDay = new Date(year, month, 1);
+      const endOfMonth = lastDay.toISOString().split('T')[0];
+      const startOfMonth = firstDay.toISOString().split('T')[0];
+
+      const querySnapshot = await getDocs(
+        query(
+          collection(db, 'transactions'),
+          where('type', '==', 'expense'),
+          where('date', '>=', startOfMonth),
+          where('date', '<=', endOfMonth)
+        )
+      );
+
+      const data = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      })) as NextAccount[];
+      setExpenses(data);
+    };
+
+    fetchExpenses();
+  }, []);
+
   const groupedByCategory = expenses.reduce(
     (acc, expense) => {
       const categoryTitle = expense.category.title;
