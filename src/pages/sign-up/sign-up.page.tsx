@@ -25,7 +25,11 @@ import {
 
 // Utilities
 import validator from 'validator';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import {
+  AuthError,
+  AuthErrorCodes,
+  createUserWithEmailAndPassword,
+} from 'firebase/auth';
 import { auth, db } from '../../config/firebase.config';
 import { addDoc, collection } from 'firebase/firestore';
 
@@ -41,6 +45,7 @@ const SignUpPage = () => {
   const {
     register,
     formState: { errors },
+    setError,
     handleSubmit,
     watch,
   } = useForm<SignUpForm>();
@@ -68,7 +73,11 @@ const SignUpPage = () => {
         terms: true,
       });
     } catch (error) {
-      console.error(error);
+      const _error = error as AuthError;
+
+      if (_error.code === AuthErrorCodes.EMAIL_EXISTS) {
+        return setError('email', { type: 'alreadyInUse' });
+      }
     }
   };
 
@@ -130,6 +139,12 @@ const SignUpPage = () => {
                 Por favor, insira um e-mail válido.
               </InputErrorMessage>
             )}
+
+            {errors?.email?.type === 'alreadyInUse' && (
+              <InputErrorMessage>
+                Este e-mail já está sendo utilizado.
+              </InputErrorMessage>
+            )}
           </RegisterInputContainer>
 
           <PasswordContainer>
@@ -147,7 +162,7 @@ const SignUpPage = () => {
                   hasError={!!errors?.password}
                   placeholder=""
                   type="password"
-                  {...register('password', { required: true })}
+                  {...register('password', { required: true, minLength: 6 })}
                 />
               </RegisterInputContainer>
 
@@ -158,6 +173,7 @@ const SignUpPage = () => {
                   type="password"
                   {...register('passwordConfirmation', {
                     required: true,
+                    minLength: 6,
                     validate: (value) => value === watchPassword,
                   })}
                 />
@@ -176,6 +192,18 @@ const SignUpPage = () => {
             {errors?.passwordConfirmation?.type === 'validate' && (
               <InputErrorMessage>
                 A confirmação da senha precisa ser igual a senha.
+              </InputErrorMessage>
+            )}
+
+            {errors?.password?.type === 'minLength' && (
+              <InputErrorMessage>
+                A senha precisa ter no mínimo 6 caracteres.
+              </InputErrorMessage>
+            )}
+
+            {errors?.passwordConfirmation?.type === 'minLength' && (
+              <InputErrorMessage>
+                A confirmação da senha precisa ter no mínimo 6 caracteres.
               </InputErrorMessage>
             )}
           </PasswordContainer>
