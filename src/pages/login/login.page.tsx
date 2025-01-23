@@ -4,9 +4,6 @@ import { CgSpinnerTwo } from 'react-icons/cg';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
-// Utilities
-import validator from 'validator';
-
 // Components
 import CustomButton from '../../components/custom-button/custom-button.component';
 import CustomInput from '../../components/custom-input/custom-input.component';
@@ -23,6 +20,9 @@ import {
   RegisterLink,
   RememberLink,
 } from './login.styles';
+
+// Utilities
+import validator from 'validator';
 
 interface LoginForm {
   email: string;
@@ -43,6 +43,7 @@ const LoginPage = () => {
 
   const handleSubmitPress = (data: LoginForm) => {
     console.log({ data });
+    navigate('/');
   };
 
   return (

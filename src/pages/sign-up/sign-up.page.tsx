@@ -4,9 +4,6 @@ import { FcGoogle } from 'react-icons/fc';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
-// Utilities
-import validator from 'validator';
-
 // Components
 import CustomButton from '../../components/custom-button/custom-button.component';
 import CustomInput from '../../components/custom-input/custom-input.component';
@@ -25,6 +22,12 @@ import {
   RegisterSubtitle,
   RegisterTermsContainer,
 } from './sign-up.styles';
+
+// Utilities
+import validator from 'validator';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth, db } from '../../config/firebase.config';
+import { addDoc, collection } from 'firebase/firestore';
 
 interface SignUpForm {
   name: string;
@@ -50,8 +53,23 @@ const SignUpPage = () => {
     navigate('/login');
   };
 
-  const handleSubmitPress = (data: SignUpForm) => {
-    console.log({ data });
+  const handleSubmitPress = async (data: SignUpForm) => {
+    try {
+      const userCredentials = await createUserWithEmailAndPassword(
+        auth,
+        data.email,
+        data.password
+      );
+
+      await addDoc(collection(db, 'users'), {
+        id: userCredentials.user.uid,
+        email: data.email,
+        fullName: data.name,
+        terms: true,
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
