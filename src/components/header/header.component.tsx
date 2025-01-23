@@ -14,7 +14,9 @@ import {
 } from './header.styles';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { FaUser } from 'react-icons/fa';
+import { FaSignOutAlt, FaUser } from 'react-icons/fa';
+import { signOut } from 'firebase/auth';
+import { auth } from '../../config/firebase.config';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -79,6 +81,13 @@ const Header = () => {
 
             <HeaderIcon>
               <FaUser size={22} onClick={() => handleNavigation('/login')} />
+            </HeaderIcon>
+            <HeaderIcon>
+              <FaSignOutAlt
+                size={22}
+                style={{ color: 'var(--red-color)' }}
+                onClick={() => signOut(auth)}
+              />
             </HeaderIcon>
           </HeaderItems>
         </HeaderItemsContainer>

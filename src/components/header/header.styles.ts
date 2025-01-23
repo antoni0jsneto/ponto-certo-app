@@ -83,8 +83,12 @@ export const HeaderIcon = styled.div`
     color: #d3f4dc;
   }
 
-  &:last-child {
+  &:nth-child(3) {
     margin-left: 6px;
+  }
+
+  &:last-child {
+    margin-left: 8px;
   }
 `;
 
