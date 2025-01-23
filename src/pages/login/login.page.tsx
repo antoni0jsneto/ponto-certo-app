@@ -23,6 +23,12 @@ import {
 
 // Utilities
 import validator from 'validator';
+import {
+  AuthError,
+  AuthErrorCodes,
+  signInWithEmailAndPassword,
+} from 'firebase/auth';
+import { auth } from '../../config/firebase.config';
 
 interface LoginForm {
   email: string;
@@ -33,6 +39,7 @@ const LoginPage = () => {
   const {
     register,
     formState: { errors },
+    setError,
     handleSubmit,
   } = useForm<LoginForm>();
   const navigate = useNavigate();
@@ -41,9 +48,22 @@ const LoginPage = () => {
     navigate('/cadastrar');
   };
 
-  const handleSubmitPress = (data: LoginForm) => {
-    console.log({ data });
-    navigate('/');
+  const handleSubmitPress = async (data: LoginForm) => {
+    try {
+      const userCredentials = await signInWithEmailAndPassword(
+        auth,
+        data.email,
+        data.password
+      );
+    } catch (error) {
+      const _error = error as AuthError;
+
+      if (_error.code === AuthErrorCodes.INVALID_LOGIN_CREDENTIALS) {
+        setError('email', { type: 'notFound' });
+        setError('password', { type: 'mismatch' });
+        return;
+      }
+    }
   };
 
   return (
@@ -97,6 +117,10 @@ const LoginPage = () => {
 
           {errors?.password?.type === 'required' && (
             <InputErrorMessage>A senha é obrigatória.</InputErrorMessage>
+          )}
+
+          {errors?.password?.type === 'mismatch' && (
+            <InputErrorMessage>Login e/ou senha incorretos.</InputErrorMessage>
           )}
         </LoginInputContainer>
 
