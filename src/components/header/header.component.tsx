@@ -1,7 +1,11 @@
+import { useContext, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Tooltip } from 'react-tooltip';
+import { signOut } from 'firebase/auth';
 import { IoMdNotifications } from 'react-icons/io';
 import { FaGear } from 'react-icons/fa6';
 import { CgSpinnerTwo } from 'react-icons/cg';
-import { Tooltip } from 'react-tooltip';
+import { FaSignOutAlt, FaUser } from 'react-icons/fa';
 
 // Styles
 import {
@@ -13,21 +17,27 @@ import {
   HeaderTitle,
   NotificationIcon,
 } from './header.styles';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { FaSignOutAlt, FaUser } from 'react-icons/fa';
-import { signOut } from 'firebase/auth';
+
+// Utilities
 import { auth } from '../../config/firebase.config';
+import { UserContext } from '../../contexts/user.context';
 
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
+
+  const { isAuthenticated } = useContext(UserContext);
 
   const [activeItem, setActiveItem] = useState(location.pathname);
 
   const handleNavigation = (path: string) => {
     navigate(path);
     setActiveItem(path);
+  };
+
+  const handleSignOutPress = async () => {
+    await signOut(auth);
+    navigate('/login');
   };
 
   return (
@@ -83,20 +93,22 @@ const Header = () => {
             <HeaderIcon>
               <FaUser size={22} onClick={() => handleNavigation('/login')} />
             </HeaderIcon>
-            <HeaderIcon>
-              <FaSignOutAlt
-                data-tooltip-id="signout-tooltip"
-                data-tooltip-content="Sair"
-                size={22}
-                style={{ color: 'var(--red-color)' }}
-                onClick={() => signOut(auth)}
-              />
-              <Tooltip
-                id="signout-tooltip"
-                place="top"
-                className="react-tooltip"
-              />
-            </HeaderIcon>
+            {isAuthenticated && (
+              <HeaderIcon>
+                <FaSignOutAlt
+                  data-tooltip-id="signout-tooltip"
+                  data-tooltip-content="Sair"
+                  size={22}
+                  style={{ color: 'var(--red-color)' }}
+                  onClick={handleSignOutPress}
+                />
+                <Tooltip
+                  id="signout-tooltip"
+                  place="top"
+                  className="react-tooltip"
+                />
+              </HeaderIcon>
+            )}
           </HeaderItems>
         </HeaderItemsContainer>
       </HeaderContainer>
