@@ -3,6 +3,14 @@ import { FiLogIn } from 'react-icons/fi';
 import { CgSpinnerTwo } from 'react-icons/cg';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import {
+  AuthError,
+  AuthErrorCodes,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  User,
+} from 'firebase/auth';
+import { addDoc, collection, getDocs, query, where } from 'firebase/firestore';
 
 // Components
 import CustomButton from '../../components/custom-button/custom-button.component';
@@ -23,12 +31,7 @@ import {
 
 // Utilities
 import validator from 'validator';
-import {
-  AuthError,
-  AuthErrorCodes,
-  signInWithEmailAndPassword,
-} from 'firebase/auth';
-import { auth } from '../../config/firebase.config';
+import { auth, db, googleProvider } from '../../config/firebase.config';
 
 interface LoginForm {
   email: string;
@@ -38,10 +41,11 @@ interface LoginForm {
 const LoginPage = () => {
   const {
     register,
-    formState: { errors },
-    setError,
     handleSubmit,
+    setError,
+    formState: { errors },
   } = useForm<LoginForm>();
+
   const navigate = useNavigate();
 
   const handleRegisterClick = () => {
@@ -61,8 +65,35 @@ const LoginPage = () => {
       if (_error.code === AuthErrorCodes.INVALID_LOGIN_CREDENTIALS) {
         setError('email', { type: 'notFound' });
         setError('password', { type: 'mismatch' });
-        return;
+        return false;
       }
+    }
+  };
+
+  const handleSignInWithGooglePress = async () => {
+    try {
+      const userCredentials = await signInWithPopup(auth, googleProvider);
+
+      const querySnapshot = await getDocs(
+        query(
+          collection(db, 'users'),
+          where('id', '==', userCredentials.user.uid)
+        )
+      );
+
+      const user = querySnapshot.docs[0]?.data() as User;
+
+      if (!user) {
+        await addDoc(collection(db, 'users'), {
+          id: userCredentials.user.uid,
+          email: userCredentials.user.email,
+          fullName: userCredentials.user.displayName,
+          terms: true,
+          provider: 'google',
+        });
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -75,7 +106,11 @@ const LoginPage = () => {
       <LoginContent>
         <LoginHeadline>Entre com a sua conta</LoginHeadline>
 
-        <CustomButton variant="danger" startIcon={<FcGoogle size={18} />}>
+        <CustomButton
+          variant="danger"
+          startIcon={<FcGoogle size={18} />}
+          onClick={() => handleSignInWithGooglePress()}
+        >
           Entrar com o Google
         </CustomButton>
 

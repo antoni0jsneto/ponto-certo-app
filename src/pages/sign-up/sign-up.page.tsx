@@ -3,6 +3,12 @@ import { CgSpinnerTwo } from 'react-icons/cg';
 import { FcGoogle } from 'react-icons/fc';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import {
+  AuthError,
+  AuthErrorCodes,
+  createUserWithEmailAndPassword,
+} from 'firebase/auth';
+import { addDoc, collection } from 'firebase/firestore';
 
 // Components
 import CustomButton from '../../components/custom-button/custom-button.component';
@@ -25,13 +31,7 @@ import {
 
 // Utilities
 import validator from 'validator';
-import {
-  AuthError,
-  AuthErrorCodes,
-  createUserWithEmailAndPassword,
-} from 'firebase/auth';
 import { auth, db } from '../../config/firebase.config';
-import { addDoc, collection } from 'firebase/firestore';
 
 interface SignUpForm {
   name: string;
@@ -71,6 +71,7 @@ const SignUpPage = () => {
         email: data.email,
         fullName: data.name,
         terms: true,
+        provider: 'firebase',
       });
     } catch (error) {
       const _error = error as AuthError;
