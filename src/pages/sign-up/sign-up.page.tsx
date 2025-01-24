@@ -1,3 +1,4 @@
+import { useContext, useEffect } from 'react';
 import { FiLogIn } from 'react-icons/fi';
 import { CgSpinnerTwo } from 'react-icons/cg';
 import { FcGoogle } from 'react-icons/fc';
@@ -32,6 +33,7 @@ import {
 // Utilities
 import validator from 'validator';
 import { auth, db } from '../../config/firebase.config';
+import { UserContext } from '../../contexts/user.context';
 
 interface SignUpForm {
   name: string;
@@ -42,6 +44,13 @@ interface SignUpForm {
 }
 
 const SignUpPage = () => {
+  const navigate = useNavigate();
+  const { isAuthenticated } = useContext(UserContext);
+
+  useEffect(() => {
+    if (isAuthenticated) navigate('/');
+  }, [isAuthenticated, navigate]);
+
   const {
     register,
     formState: { errors },
@@ -51,8 +60,6 @@ const SignUpPage = () => {
   } = useForm<SignUpForm>();
 
   const watchPassword = watch('password');
-
-  const navigate = useNavigate();
 
   const handleLoginClick = () => {
     navigate('/login');

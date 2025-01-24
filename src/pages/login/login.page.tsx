@@ -1,8 +1,9 @@
+import { useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc';
 import { FiLogIn } from 'react-icons/fi';
 import { CgSpinnerTwo } from 'react-icons/cg';
-import { useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
 import {
   AuthError,
   AuthErrorCodes,
@@ -32,6 +33,7 @@ import {
 // Utilities
 import validator from 'validator';
 import { auth, db, googleProvider } from '../../config/firebase.config';
+import { UserContext } from '../../contexts/user.context';
 
 interface LoginForm {
   email: string;
@@ -39,14 +41,19 @@ interface LoginForm {
 }
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+  const { isAuthenticated } = useContext(UserContext);
+
+  useEffect(() => {
+    if (isAuthenticated) navigate('/');
+  }, [isAuthenticated, navigate]);
+
   const {
     register,
     handleSubmit,
     setError,
     formState: { errors },
   } = useForm<LoginForm>();
-
-  const navigate = useNavigate();
 
   const handleRegisterClick = () => {
     navigate('/cadastrar');
