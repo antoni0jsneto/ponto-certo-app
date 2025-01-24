@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { FiLogIn } from 'react-icons/fi';
 import { CgSpinnerTwo } from 'react-icons/cg';
 import { FcGoogle } from 'react-icons/fc';
@@ -15,6 +15,7 @@ import { addDoc, collection } from 'firebase/firestore';
 import CustomButton from '../../components/custom-button/custom-button.component';
 import CustomInput from '../../components/custom-input/custom-input.component';
 import InputErrorMessage from '../../components/input-error-message/input-error-message.component';
+import Loading from '../../components/loading/loading.component';
 
 // Styles
 import { RegisterLink } from '../login/login.styles';
@@ -59,6 +60,8 @@ const SignUpPage = () => {
     watch,
   } = useForm<SignUpForm>();
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const watchPassword = watch('password');
 
   const handleLoginClick = () => {
@@ -67,6 +70,7 @@ const SignUpPage = () => {
 
   const handleSubmitPress = async (data: SignUpForm) => {
     try {
+      setIsLoading(true);
       const userCredentials = await createUserWithEmailAndPassword(
         auth,
         data.email,
@@ -86,8 +90,12 @@ const SignUpPage = () => {
       if (_error.code === AuthErrorCodes.EMAIL_EXISTS) {
         return setError('email', { type: 'alreadyInUse' });
       }
+    } finally {
+      setIsLoading(false);
     }
   };
+
+  if (isLoading) return <Loading />;
 
   return (
     <RegisterContainer>
@@ -102,13 +110,8 @@ const SignUpPage = () => {
           Crie sua conta para começar a controlar sua grana
         </RegisterSubtitle>
 
-        <CustomButton variant="danger" startIcon={<FcGoogle size={18} />}>
-          Cria uma conta usando o Google
-        </CustomButton>
-
         <div
           style={{
-            marginTop: '30px',
             display: 'flex',
             flexDirection: 'column',
             gap: '20px',
