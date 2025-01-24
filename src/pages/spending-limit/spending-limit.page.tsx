@@ -1,3 +1,6 @@
+import { useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 // Components
 import SubHeader from '../../components/sub-header/sub-header.component';
 import Card from '../../components/card/card.component';
@@ -6,45 +9,15 @@ import Container from '../../components/container/container.component';
 import SpendingLimitContent from '../../components/spending-limit-content/spending-limit-content.component';
 
 // Utilities
-import { PiForkKnifeFill } from 'react-icons/pi';
-import Category from '../../types/category.types';
-import Account from '../../types/account.types';
-import { FaGraduationCap, FaLaptopCode } from 'react-icons/fa6';
-import { BiSolidDrink } from 'react-icons/bi';
-import { AiFillHome } from 'react-icons/ai';
-import { GoStarFill } from 'react-icons/go';
-import NextAccount from '../../types/next-account.types';
+import { UserContext } from '../../contexts/user.context';
 
 const SpendingLimitPage = () => {
-  const accounts: Account[] = [
-    {
-      id: '1',
-      icon: {
-        src: '/institutions/logos/carteira-inicial.png',
-        alt: 'Conta inicial',
-      },
-      name: 'Conta inicial',
-      type: 'Conta manual',
-    },
-    {
-      id: '2',
-      icon: {
-        src: '/institutions/logos/intermedium.png',
-        alt: 'Inter',
-      },
-      name: 'Inter',
-      type: 'Conta manual',
-    },
-    {
-      id: '3',
-      icon: {
-        src: '/institutions/logos/nuconta.png',
-        alt: 'NuBank',
-      },
-      name: 'NuBank',
-      type: 'Conta manual',
-    },
-  ];
+  const navigate = useNavigate();
+  const { isAuthenticated } = useContext(UserContext);
+
+  useEffect(() => {
+    if (!isAuthenticated) navigate('/login');
+  }, [isAuthenticated, navigate]);
 
   return (
     <div>

@@ -1,3 +1,6 @@
+import { useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 // Components
 import Card from '../../components/card/card.component';
 import Container from '../../components/container/container.component';
@@ -9,7 +12,17 @@ import MonthlySpendingLimit from '../../components/home/monthly-spending-limit/m
 import HigherExpenses from '../../components/home/higher-expenses/higher-expenses.component';
 import MyAccounts from '../../components/home/my-accounts/my-accounts.component';
 
+// Utilities
+import { UserContext } from '../../contexts/user.context';
+
 const HomePage = () => {
+  const navigate = useNavigate();
+  const { isAuthenticated } = useContext(UserContext);
+
+  useEffect(() => {
+    if (!isAuthenticated) navigate('/login');
+  }, [isAuthenticated, navigate]);
+
   return (
     <div>
       <Header />
