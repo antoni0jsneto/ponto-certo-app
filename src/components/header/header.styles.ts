@@ -11,6 +11,14 @@ export const HeaderContainer = styled.div`
   color: #fffdf9;
   gap: 4rem;
   max-width: var(--default-max-large-width);
+
+  .react-tooltip {
+    background-color: #333 !important;
+    color: #fff !important;
+    font-size: 14px !important;
+    border-radius: 4px !important;
+    padding: 8px !important;
+  }
 `;
 
 export const HeaderTitle = styled.h2`

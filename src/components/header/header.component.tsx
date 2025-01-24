@@ -1,6 +1,7 @@
 import { IoMdNotifications } from 'react-icons/io';
 import { FaGear } from 'react-icons/fa6';
 import { CgSpinnerTwo } from 'react-icons/cg';
+import { Tooltip } from 'react-tooltip';
 
 // Styles
 import {
@@ -84,9 +85,16 @@ const Header = () => {
             </HeaderIcon>
             <HeaderIcon>
               <FaSignOutAlt
+                data-tooltip-id="signout-tooltip"
+                data-tooltip-content="Sair"
                 size={22}
                 style={{ color: 'var(--red-color)' }}
                 onClick={() => signOut(auth)}
+              />
+              <Tooltip
+                id="signout-tooltip"
+                place="top"
+                className="react-tooltip"
               />
             </HeaderIcon>
           </HeaderItems>
