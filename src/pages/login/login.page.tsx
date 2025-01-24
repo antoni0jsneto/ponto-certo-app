@@ -59,6 +59,8 @@ const LoginPage = () => {
         data.email,
         data.password
       );
+
+      navigate('/');
     } catch (error) {
       const _error = error as AuthError;
 
@@ -92,6 +94,8 @@ const LoginPage = () => {
           provider: 'google',
         });
       }
+
+      navigate('/');
     } catch (error) {
       console.log(error);
     }
