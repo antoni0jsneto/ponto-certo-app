@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc';
@@ -17,6 +17,7 @@ import { addDoc, collection, getDocs, query, where } from 'firebase/firestore';
 import CustomButton from '../../components/custom-button/custom-button.component';
 import CustomInput from '../../components/custom-input/custom-input.component';
 import InputErrorMessage from '../../components/input-error-message/input-error-message.component';
+import Loading from '../../components/loading/loading.component';
 
 // Styles
 import {
@@ -55,12 +56,16 @@ const LoginPage = () => {
     formState: { errors },
   } = useForm<LoginForm>();
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleRegisterClick = () => {
     navigate('/cadastrar');
   };
 
   const handleSubmitPress = async (data: LoginForm) => {
     try {
+      setIsLoading(true);
+
       const userCredentials = await signInWithEmailAndPassword(
         auth,
         data.email,
@@ -76,11 +81,15 @@ const LoginPage = () => {
         setError('password', { type: 'mismatch' });
         return false;
       }
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleSignInWithGooglePress = async () => {
     try {
+      setIsLoading(true);
+
       const userCredentials = await signInWithPopup(auth, googleProvider);
 
       const querySnapshot = await getDocs(
@@ -105,8 +114,12 @@ const LoginPage = () => {
       navigate('/');
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
+
+  if (isLoading) return <Loading />;
 
   return (
     <LoginContainer>
