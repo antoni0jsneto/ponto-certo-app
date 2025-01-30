@@ -47,6 +47,8 @@ const Header = () => {
         display: 'flex',
         justifyContent: 'center',
         marginBottom: '2rem',
+        position: 'sticky',
+        top: 0,
       }}
     >
       <HeaderContainer>
