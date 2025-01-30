@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { FunctionComponent } from 'react';
+import { getDocs, collection, query, where } from 'firebase/firestore';
 
 // Utilities
-import NextAccount from '../../../types/next-account.types';
+import Transaction from '../../../types/transaction.types';
 import { IoMdArrowDropup, IoMdArrowDropdown } from 'react-icons/io';
 import { formatCurrencyWithSymbol } from '../../../utils/formatCurrency';
+import { db } from '../../../config/firebase.config';
 
 // Styles
 import {
@@ -24,8 +26,6 @@ import {
 // Components
 import Title from '../../title/title.component';
 import ReactIcon from '../../react-icon/react-icon.component';
-import { getDocs, collection, query, where } from 'firebase/firestore';
-import { db } from '../../../config/firebase.config';
 
 interface NextAccountsProps {
   title: string;
@@ -41,33 +41,35 @@ const NextAccounts: FunctionComponent<NextAccountsProps> = ({
   incrementValue = 3,
 }) => {
   const [visibleCount, setVisibleCount] = useState(initialLimit);
-  const [itens, setItens] = useState<NextAccount[]>([]);
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchTransactions = async () => {
       try {
         const snapshot = await getDocs(
           query(collection(db, 'transactions'), where('type', '==', type))
         );
+
         const data = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
-        })) as NextAccount[];
-        setItens(data);
+        })) as Transaction[];
+
+        setTransactions(data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
 
-    fetchData();
+    fetchTransactions();
   }, []);
 
   const handleToggleShow = () => {
-    if (visibleCount >= itens.length) {
+    if (visibleCount >= transactions.length) {
       setVisibleCount(initialLimit);
     } else {
       setVisibleCount((prevCount) =>
-        Math.min(prevCount + incrementValue, itens.length)
+        Math.min(prevCount + incrementValue, transactions.length)
       );
     }
   };
@@ -80,7 +82,7 @@ const NextAccounts: FunctionComponent<NextAccountsProps> = ({
       </NextAccountsHeader>
 
       <NextAccountsItemsContainer>
-        {itens.slice(0, visibleCount).map((item, index) => {
+        {transactions.slice(0, visibleCount).map((item, index) => {
           const formattedPrice = formatCurrencyWithSymbol(item.value);
 
           return (
@@ -99,7 +101,8 @@ const NextAccounts: FunctionComponent<NextAccountsProps> = ({
                 </NextAccountsItemContent>
                 <p>{formattedPrice}</p>
               </NextAccountsItem>
-              {index < itens.filter((_, i) => i < visibleCount).length - 1 && (
+              {index <
+                transactions.filter((_, i) => i < visibleCount).length - 1 && (
                 <NextAccountsDivisory />
               )}
             </div>
@@ -114,9 +117,9 @@ const NextAccounts: FunctionComponent<NextAccountsProps> = ({
           justifyContent: 'center',
         }}
       >
-        {itens.length > initialLimit && (
+        {transactions.length > initialLimit && (
           <SeeMoreButton onClick={handleToggleShow}>
-            {visibleCount >= itens.length ? (
+            {visibleCount >= transactions.length ? (
               <>
                 Ver Menos <IoMdArrowDropup />
               </>

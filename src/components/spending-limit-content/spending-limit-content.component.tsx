@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FunctionComponent, useEffect, useState } from 'react';
 import { MdEdit } from 'react-icons/md';
 import { FaPlus } from 'react-icons/fa';
@@ -24,15 +24,14 @@ import {
   SpendingLimitProgressBarText,
 } from './spending-limit-content.styles';
 
-// Utilities
-import { formatCurrencyWithoutSymbol } from '../../utils/formatCurrency';
-import Category from '../../types/category.types';
-import NextAccount from '../../types/next-account.types';
-import { collection, getDocs, query, where } from 'firebase/firestore';
-import { db } from '../../config/firebase.config';
-
 // Components
 import ReactIcon from '../react-icon/react-icon.component';
+
+// Utilities
+import { formatCurrencyWithoutSymbol } from '../../utils/formatCurrency';
+import Transaction from '../../types/transaction.types';
+import { CategoryContext } from '../../contexts/category.context';
+import { TransactionContext } from '../../contexts/transaction.context';
 
 interface SpendingLimitContentProps {}
 
@@ -50,7 +49,7 @@ interface CategorySummary {
 
 // Helper Functions
 const calculateCategorySummaries = (
-  expenses: NextAccount[]
+  expenses: Transaction[]
 ): Record<string, CategorySummary> => {
   return expenses.reduce<Record<string, CategorySummary>>((acc, expense) => {
     const { title, icon, background, goal } = expense.category;
@@ -75,49 +74,12 @@ const calculateCategorySummaries = (
 const SpendingLimitContent: FunctionComponent<
   SpendingLimitContentProps
 > = () => {
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [expenses, setExpenses] = useState<NextAccount[]>([]);
+  const { categories, fetchCategories } = useContext(CategoryContext);
+  const { expenses, fetchExpenses } = useContext(TransactionContext);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [categoriesSnapshot, expensesSnapshot] = await Promise.all([
-          getDocs(collection(db, 'categories')),
-          getDocs(
-            query(
-              collection(db, 'transactions'),
-              where('type', '==', 'expense')
-            )
-          ),
-        ]);
-
-        const categoriesData = categoriesSnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        })) as Category[];
-
-        const expensesData = expensesSnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        })) as NextAccount[];
-
-        setCategories((prev) =>
-          JSON.stringify(prev) === JSON.stringify(categoriesData)
-            ? prev
-            : categoriesData
-        );
-
-        setExpenses((prev) =>
-          JSON.stringify(prev) === JSON.stringify(expensesData)
-            ? prev
-            : expensesData
-        );
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
+    fetchCategories();
+    fetchExpenses();
   }, []);
 
   // Totals

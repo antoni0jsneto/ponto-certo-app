@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect, useState } from 'react';
+import { FunctionComponent, useContext, useEffect, useState } from 'react';
 
 // Styles
 import {
@@ -14,14 +14,12 @@ import {
 } from './monthly-spending-limit.styles';
 
 // Utilities
-import NextAccount from '../../../types/next-account.types';
 import { PieChart, Pie, Cell } from 'recharts';
+import { TransactionContext } from '../../../contexts/transaction.context';
 
 // Components
 import CustomButton from '../../custom-button/custom-button.component';
 import Title from '../../title/title.component';
-import { getDocs, query, collection, where } from 'firebase/firestore';
-import { db } from '../../../config/firebase.config';
 
 interface MonthlySpendingLimitProps {
   title: string;
@@ -30,34 +28,10 @@ interface MonthlySpendingLimitProps {
 const MonthlySpendingLimit: FunctionComponent<MonthlySpendingLimitProps> = ({
   title,
 }) => {
-  const [expenses, setExpenses] = useState<NextAccount[]>([]);
+  const { expenses, fetchExpensesForMonth } = useContext(TransactionContext);
 
   useEffect(() => {
-    const fetchExpenses = async () => {
-      const year = 2025;
-      const month = 0;
-      const lastDay = new Date(year, month + 1, 0);
-      const firstDay = new Date(year, month, 1);
-      const endOfMonth = lastDay.toISOString().split('T')[0];
-      const startOfMonth = firstDay.toISOString().split('T')[0];
-
-      const querySnapshot = await getDocs(
-        query(
-          collection(db, 'transactions'),
-          where('type', '==', 'expense'),
-          where('date', '>=', startOfMonth),
-          where('date', '<=', endOfMonth)
-        )
-      );
-
-      const data = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      })) as NextAccount[];
-      setExpenses(data);
-    };
-
-    fetchExpenses();
+    fetchExpensesForMonth();
   }, []);
 
   const groupedByCategory = expenses.reduce(

@@ -10,6 +10,9 @@ import App from './App';
 
 // Utilities
 import UserContextProvider from './contexts/user.context';
+import CategoryContextProvider from './contexts/category.context';
+import TransactionContextProvider from './contexts/transaction.context';
+import AccountContextProvider from './contexts/account.context';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -17,7 +20,13 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <UserContextProvider>
-      <App />
+      <CategoryContextProvider>
+        <TransactionContextProvider>
+          <AccountContextProvider>
+            <App />
+          </AccountContextProvider>
+        </TransactionContextProvider>
+      </CategoryContextProvider>
     </UserContextProvider>
   </React.StrictMode>
 );

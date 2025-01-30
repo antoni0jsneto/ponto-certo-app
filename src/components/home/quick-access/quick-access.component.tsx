@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect, useState } from 'react';
+import { FunctionComponent, useContext, useEffect, useState } from 'react';
 import { FiMinusCircle } from 'react-icons/fi';
 import { LuCirclePlus } from 'react-icons/lu';
 import { BiTransfer } from 'react-icons/bi';
@@ -8,11 +8,9 @@ import { BsBarChart } from 'react-icons/bs';
 import './quick-access.styles.css';
 
 // Utilities
-import NextAccount from '../../../types/next-account.types';
 import { getCurrentAndNextMonth } from '../../../utils/getMonth';
 import { formatCurrencyWithSymbol } from '../../../utils/formatCurrency';
-import { getDocs, collection } from 'firebase/firestore';
-import { db } from '../../../config/firebase.config';
+import { TransactionContext } from '../../../contexts/transaction.context';
 
 // Components
 import QuickCustomButton from '../../quick-custom-button/quick-custom-button.component';
@@ -21,25 +19,12 @@ import Title from '../../title/title.component';
 interface QuickAccessProps {}
 
 const QuickAccess: FunctionComponent<QuickAccessProps> = ({}) => {
-  const [income, setIncome] = useState<NextAccount[]>([]);
-  const [expenses, setExpenses] = useState<NextAccount[]>([]);
+  const { income, expenses, fetchIncome, fetchExpenses } =
+    useContext(TransactionContext);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const snapshot = await getDocs(collection(db, 'transactions'));
-        const data = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        })) as NextAccount[];
-        setIncome(data.filter((item) => item.type === 'income'));
-        setExpenses(data.filter((item) => item.type === 'expense'));
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
+    fetchIncome();
+    fetchExpenses();
   }, []);
 
   const { currentMonth } = getCurrentAndNextMonth();

@@ -1,4 +1,11 @@
-import { Fragment, FunctionComponent, useEffect, useState } from 'react';
+import {
+  Fragment,
+  FunctionComponent,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
+import { getDocs, collection, query, where } from 'firebase/firestore';
 
 // Styles
 import {
@@ -25,45 +32,35 @@ import {
 // Utilities
 import CreditCard from '../../../types/credit-card.types';
 import { formatCurrencyWithoutSymbol } from '../../../utils/formatCurrency';
-import NextAccount from '../../../types/next-account.types';
+import Transaction from '../../../types/transaction.types';
 import { getCurrentAndNextMonth } from '../../../utils/getMonth';
-import { getDocs, collection, query, where } from 'firebase/firestore';
 import { db } from '../../../config/firebase.config';
 
 // Components
 import CustomButton from '../../custom-button/custom-button.component';
 import Title from '../../title/title.component';
 import GeneralBalance from '../general-balance/general-balance.component';
+import { TransactionContext } from '../../../contexts/transaction.context';
 
 interface MyCreditCardsProps {}
 
 const MyCreditCards: FunctionComponent<MyCreditCardsProps> = () => {
-  const [itens, setItens] = useState<CreditCard[]>([]);
-  const [expenses, setExpenses] = useState<NextAccount[]>([]);
+  const [cards, setCards] = useState<CreditCard[]>([]);
+  const { expenses, fetchExpenses } = useContext(TransactionContext);
 
   useEffect(() => {
-    const fetchItens = async () => {
-      const [itensSnapshot, expensesSnapshot] = await Promise.all([
-        getDocs(collection(db, 'creditCards')),
-        getDocs(
-          query(collection(db, 'transactions'), where('type', '==', 'expense'))
-        ),
-      ]);
+    const fetchCards = async () => {
+      const cardsSnapshot = await getDocs(collection(db, 'creditCards'));
 
-      const itensData = itensSnapshot.docs.map((doc) => ({
+      const cardsData = cardsSnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       })) as CreditCard[];
 
-      const expensesData = expensesSnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      })) as NextAccount[];
-
-      setItens(itensData);
-      setExpenses(expensesData);
+      setCards(cardsData);
     };
-    fetchItens();
+    fetchCards();
+    fetchExpenses();
   }, []);
 
   const { currentMonth, nextMonth } = getCurrentAndNextMonth();
@@ -85,9 +82,9 @@ const MyCreditCards: FunctionComponent<MyCreditCardsProps> = () => {
       <MyCreditCardsContent>
         <Title marginBottom="20px">Meus Cartões</Title>
         <MyCreditCardsItems>
-          {itens.map((item, index) => {
+          {cards.map((card, index) => {
             const totalExpenses = expenses
-              .filter((expense) => expense.account.id === item.id)
+              .filter((expense) => expense.account.id === card.id)
               .reduce((acc, expense) => acc + expense.value, 0);
 
             return (
@@ -96,16 +93,16 @@ const MyCreditCards: FunctionComponent<MyCreditCardsProps> = () => {
                   <MyCreditCardsItemCard>
                     <MyCreditCardsItemImgContainer>
                       <MyCreditCardsItemImg
-                        src={item.icon.src}
-                        alt={item.icon.alt}
+                        src={card.icon.src}
+                        alt={card.icon.alt}
                       />
                     </MyCreditCardsItemImgContainer>
                     <MyCreditCardsItemTitleContainer>
                       <MyCreditCardsItemTitle>
-                        {item.name}
+                        {card.name}
                       </MyCreditCardsItemTitle>
                       <MyCreditCardsItemSubtitle>
-                        {item.type}
+                        {card.type}
                       </MyCreditCardsItemSubtitle>
                     </MyCreditCardsItemTitleContainer>
                     <MyCreditCardsItemSeeInvoice>
@@ -120,7 +117,7 @@ const MyCreditCards: FunctionComponent<MyCreditCardsProps> = () => {
                       <MyCreditCardsItemAvaliableLimitTitle2>
                         R$
                         <MyCreditCardsItemAvaliableLimitSubtitle>
-                          {formatCurrencyWithoutSymbol(item.limit)}
+                          {formatCurrencyWithoutSymbol(card.limit)}
                         </MyCreditCardsItemAvaliableLimitSubtitle>
                       </MyCreditCardsItemAvaliableLimitTitle2>
                     </MyCreditCardsItemSeeBalanceContent>
@@ -128,8 +125,8 @@ const MyCreditCards: FunctionComponent<MyCreditCardsProps> = () => {
                       <MyCreditCardsItemAvaliableLimitTitle>
                         Fatura Atual{' '}
                         <MyCreditCardsItemMaturity>
-                          (Venc {item.winsDay}/
-                          {day > item.winsDay ? nextMonth : currentMonth})
+                          (Venc {card.winsDay}/
+                          {day > card.winsDay ? nextMonth : currentMonth})
                         </MyCreditCardsItemMaturity>
                       </MyCreditCardsItemAvaliableLimitTitle>
                       <MyCreditCardsItemAvaliableLimitTitle2>
@@ -141,7 +138,7 @@ const MyCreditCards: FunctionComponent<MyCreditCardsProps> = () => {
                     </MyCreditCardsItemSeeBalanceContent>
                   </MyCreditCardsItemSeeBalanceContainer>
                 </MyCreditCardsItem>
-                {itens.length - 1 !== index && <MyCreditCardsDivisory />}
+                {cards.length - 1 !== index && <MyCreditCardsDivisory />}
               </Fragment>
             );
           })}

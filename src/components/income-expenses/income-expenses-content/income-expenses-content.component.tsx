@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FunctionComponent } from 'react';
 import { HiHandThumbUp, HiHandThumbDown } from 'react-icons/hi2';
 import { FaPlus } from 'react-icons/fa';
 
 // Utilities
-import NextAccount from '../../../types/next-account.types';
+import Transaction from '../../../types/transaction.types';
 import { formatCurrencyWithSymbol } from '../../../utils/formatCurrency';
-import { query, collection, where, getDocs } from 'firebase/firestore';
-import { db } from '../../../config/firebase.config';
+import { TransactionContext } from '../../../contexts/transaction.context';
 
 // Styles
 import {
@@ -36,7 +35,7 @@ import {
 import ReactIcon from '../../react-icon/react-icon.component';
 
 interface IncomeExpensesItemProps {
-  item: NextAccount;
+  item: Transaction;
   isNewDate: boolean;
 }
 
@@ -117,35 +116,21 @@ const IncomeExpenseItem: FunctionComponent<IncomeExpensesItemProps> = ({
 
 // Main component
 const IncomeExpensesContent: FunctionComponent = () => {
-  const [income, setIncome] = useState<NextAccount[]>([]);
-  const [expenses, setExpenses] = useState<NextAccount[]>([]);
+  const { income, expenses, fetchIncome, fetchExpenses } =
+    useContext(TransactionContext);
 
   useEffect(() => {
-    const incomeQuery = query(
-      collection(db, 'transactions'),
-      where('type', '==', 'income')
-    );
-    const expensesQuery = query(
-      collection(db, 'transactions'),
-      where('type', '==', 'expense')
-    );
-    getDocs(incomeQuery).then((snapshot) => {
-      const data = snapshot.docs.map((doc) => doc.data() as NextAccount);
-      setIncome(data);
-    });
-    getDocs(expensesQuery).then((snapshot) => {
-      const data = snapshot.docs.map((doc) => doc.data() as NextAccount);
-      setExpenses(data);
-    });
+    fetchIncome();
+    fetchExpenses();
   }, []);
 
   // Filter and sum helper functions
-  const filterByMonth = (data: NextAccount[], processed: boolean) =>
+  const filterByMonth = (data: Transaction[], processed: boolean) =>
     data.filter(
       (item) => includesMonth(item.date) && item.processed === processed
     );
 
-  const sumValues = (data: NextAccount[]) =>
+  const sumValues = (data: Transaction[]) =>
     data.reduce((acc, item) => acc + item.value, 0);
 
   // Filtered and summed data
