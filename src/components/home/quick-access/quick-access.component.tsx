@@ -15,10 +15,14 @@ import { TransactionContext } from '../../../contexts/transaction.context';
 // Components
 import QuickCustomButton from '../../quick-custom-button/quick-custom-button.component';
 import Title from '../../title/title.component';
+import Modal from '../../modal/modal.component';
+import ExpenseModal from '../../expense-modal/expense-modal.component';
 
 interface QuickAccessProps {}
 
 const QuickAccess: FunctionComponent<QuickAccessProps> = ({}) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const { income, expenses, fetchIncome, fetchExpenses } =
     useContext(TransactionContext);
 
@@ -67,6 +71,7 @@ const QuickAccess: FunctionComponent<QuickAccessProps> = ({}) => {
           <QuickCustomButton
             startIcon={<FiMinusCircle />}
             iconColor="var(--red-color)"
+            onClick={() => setIsModalOpen(true)}
           >
             Despesa
           </QuickCustomButton>
@@ -86,6 +91,12 @@ const QuickAccess: FunctionComponent<QuickAccessProps> = ({}) => {
             Relat.
           </QuickCustomButton>
         </div>
+      </div>
+
+      <div>
+        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+          <ExpenseModal />
+        </Modal>
       </div>
     </div>
   );
